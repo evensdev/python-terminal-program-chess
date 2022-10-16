@@ -1,4 +1,6 @@
 FRANÇAIS
+
+
 Bonjour, Veuillez trouver à travers ce fichier les informations nécessaires pour lancer l'application LitReview via Django
 
 Dans votre terminal tapez la commande : git clone https://github.com/evensdev/python-terminal-program-chess.git
@@ -13,7 +15,12 @@ Installez les packages nécessaires avec cette commmande : pip install -r requir
 
 Lancez l'application dans le terminal avec cette commande : python app.py
 
+
+
 ENGLISH
+
+
+
 Hello, please find in this file the necessary information to launch the LitReview application via Django
 
 In your terminal type the command: git clone https://github.com/evensdev/python-terminal-program-chess.git
