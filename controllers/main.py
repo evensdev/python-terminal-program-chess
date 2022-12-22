@@ -52,7 +52,6 @@ class PlayerController:
     def __init__(self):
         self.display = Display()
 
-    def menu_players(self):
 
     def menu_players(self):
         
@@ -70,12 +69,6 @@ class PlayerController:
 
         while response != len(menu):
 
-            #print(response, len(menu), response != len(menu))
-
-            if (response == 1):
-                PlayerController().menu_players()
-
-            print(response, len(menu), response != len(menu))
 
             if (response == 1):
                 PlayerController().create_player()
@@ -105,7 +98,7 @@ class PlayerController:
         self.display.affiche("Ajout d'un nouveau joueur")
         self.display.affiche("-------------------------------------------------- ")
         self.display.affiche("                                       ")
-
+        self.display.affiche("                                       ")
 
 
         prenom = input(f'Ajoutez le prénom du joueur : ')
