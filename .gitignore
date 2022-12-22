@@ -1,0 +1,4 @@
+# ignorer le dossier env
+
+env/
+
