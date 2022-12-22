@@ -24,7 +24,54 @@ PLAYER_SUBSCRIBED = [['Evens', 'JOSEPH', '13/06/1991', 'm', '1'],
                      ['Oscar', 'JOSEPH', '04/06/2027', 'm', '8']
                      ]
 
+LIST_OF_DUEL = [[
 
+    [['Evens', 0], ['Clara', 0]],
+       [['Elodie', 0], ['Chelsea', 0]],
+       [['Nina', 0], ['Kylian', 0]],
+       [['Kylian', 0], ['Elohim', 0]]
+    ],
+               [[['Evens', 0], ['Elodie', 0]],
+       [['Kylian', 0], ['Chelsea', 0]],
+       [['Nina', 0], ['Clara', 0]],
+       [['Clara', 0], ['Seven', 0]]
+    ],
+               [[['Evens', 0], ['Chelsea', 0]],
+       [['Elodie', 0], ['Seven', 0]],
+       [['Nina', 0], ['Seven', 0]],
+       [['Kylian', 0], ['Clara', 0]]
+    ],
+               [[['Evens', 0], ['Seven', 0]],
+       [['Elodie', 0], ['Elohim', 0]],
+       [['Nina', 0], ['Elohim', 0]],
+       [['Kylian', 0], ['Elohim', 0]]
+    ]]
+
+
+
+LIST_ROUNDS = [
+
+    ["Round n°1",
+    datetime.datetime(2022, 8, 10, 14, 25, 22, 195002),
+     datetime.datetime(2022, 8, 10, 17, 25, 22, 195002),
+     [LIST_OF_DUEL[0]]
+     ],
+    ["Round n°2",
+    datetime.datetime(2022, 8, 10, 14, 25, 22, 195002),
+     datetime.datetime(2022, 8, 10, 17, 25, 22, 195002),
+     [LIST_OF_DUEL[1]]
+     ],
+    ["Round n°3",
+    datetime.datetime(2022, 8, 10, 14, 25, 22, 195002),
+     datetime.datetime(2022, 8, 10, 17, 25, 22, 195002),
+     [LIST_OF_DUEL[2]]
+     ],
+    ["Round n°4",
+    datetime.datetime(2022, 8, 10, 14, 25, 22, 195002),
+     datetime.datetime(2022, 8, 10, 17, 25, 22, 195002),
+     [LIST_OF_DUEL[3]]
+     ],
+         ]
 
 TOURNOIS_LIST = [
 
@@ -56,53 +103,7 @@ TOURNOIS_LIST = [
 
 
 
-LIST_OF_DUEL = [[
 
-    [['Evens', 0], ['Clara', 0]],
-       [['Elodie', 0], ['Chelsea', 0]],
-       [['Nina', 0], ['Kylian', 0]],
-       [['Kylian', 0], ['Elohim', 0]]
-    ],
-               [[['Evens', 0], ['Elodie', 0]],
-       [['Kylian', 0], ['Chelsea', 0]],
-       [['Nina', 0], ['Clara', 0]],
-       [['Clara', 0], ['Seven', 0]]
-    ],
-               [[['Evens', 0], ['Chelsea', 0]],
-       [['Elodie', 0], ['Seven', 0]],
-       [['Nina', 0], ['Seven', 0]],
-       [['Kylian', 0], ['Clara', 0]]
-    ],
-               [[['Evens', 0], ['Seven', 0]],
-       [['Elodie', 0], ['Elohim', 0]],
-       [['Nina', 0], ['Elohim', 0]],
-       [['Kylian', 0], ['Elohim', 0]]
-    ]]
-
-
-LIST_ROUNDS = [
-
-    ["Round n°1",
-    datetime.datetime(2022, 8, 10, 14, 25, 22, 195002),
-     datetime.datetime(2022, 8, 10, 17, 25, 22, 195002),
-     [LIST_OF_DUEL[0]]
-     ],
-    ["Round n°2",
-    datetime.datetime(2022, 8, 10, 14, 25, 22, 195002),
-     datetime.datetime(2022, 8, 10, 17, 25, 22, 195002),
-     [LIST_OF_DUEL[1]]
-     ],
-    ["Round n°3",
-    datetime.datetime(2022, 8, 10, 14, 25, 22, 195002),
-     datetime.datetime(2022, 8, 10, 17, 25, 22, 195002),
-     [LIST_OF_DUEL[2]]
-     ],
-    ["Round n°4",
-    datetime.datetime(2022, 8, 10, 14, 25, 22, 195002),
-     datetime.datetime(2022, 8, 10, 17, 25, 22, 195002),
-     [LIST_OF_DUEL[3]]
-     ],
-         ]
 
 
 
