@@ -6,7 +6,6 @@ db = TinyDB('db.json')
 
 
 # LISTE DE JOUEURS INSCRITS
-
 PLAYER_SUBSCRIBED = [['Evens', 'JOSEPH', '13/06/1991', 'm', '1'],
                   ['Elodie', 'JOSEPH', '28/11/1981', 'f', '2'],
                   ['Nina', 'JOSEPH', '02/03/2023', 'f', '3'],
@@ -25,7 +24,56 @@ PLAYER_SUBSCRIBED = [['Evens', 'JOSEPH', '13/06/1991', 'm', '1'],
                      ['Oscar', 'JOSEPH', '04/06/2027', 'm', '8']
                      ]
 
-LIST_ROUNDS = []
+LIST_OF_DUEL = [[
+
+    [['Evens', 0], ['Clara', 0]],
+       [['Elodie', 0], ['Chelsea', 0]],
+       [['Nina', 0], ['Kylian', 0]],
+       [['Kylian', 0], ['Elohim', 0]]
+    ],
+               [[['Evens', 0], ['Elodie', 0]],
+       [['Kylian', 0], ['Chelsea', 0]],
+       [['Nina', 0], ['Clara', 0]],
+       [['Clara', 0], ['Seven', 0]]
+    ],
+               [[['Evens', 0], ['Chelsea', 0]],
+       [['Elodie', 0], ['Seven', 0]],
+       [['Nina', 0], ['Seven', 0]],
+       [['Kylian', 0], ['Clara', 0]]
+    ],
+               [[['Evens', 0], ['Seven', 0]],
+       [['Elodie', 0], ['Elohim', 0]],
+       [['Nina', 0], ['Elohim', 0]],
+       [['Kylian', 0], ['Elohim', 0]]
+    ]]
+
+
+
+LIST_ROUNDS = [
+
+    ["Round n°1",
+    datetime.datetime(2022, 8, 10, 14, 25, 22, 195002),
+     datetime.datetime(2022, 8, 10, 17, 25, 22, 195002),
+     [LIST_OF_DUEL[0]]
+     ],
+    ["Round n°2",
+    datetime.datetime(2022, 8, 10, 14, 25, 22, 195002),
+     datetime.datetime(2022, 8, 10, 17, 25, 22, 195002),
+     [LIST_OF_DUEL[1]]
+     ],
+    ["Round n°3",
+    datetime.datetime(2022, 8, 10, 14, 25, 22, 195002),
+     datetime.datetime(2022, 8, 10, 17, 25, 22, 195002),
+     [LIST_OF_DUEL[2]]
+     ],
+    ["Round n°4",
+    datetime.datetime(2022, 8, 10, 14, 25, 22, 195002),
+     datetime.datetime(2022, 8, 10, 17, 25, 22, 195002),
+     [LIST_OF_DUEL[3]]
+     ],
+         ]
+
+
 
 TOURNOIS_LIST = [
 
@@ -76,121 +124,6 @@ class Player:
 
         return list_player
 
-
-class Rounds:
-    def __init__(self,
-                 start = datetime.datetime.now(),
-                 end = str(),
-                 matches = []):
-
-        self.start = datetime.datetime.now()
-        self.end = datetime.datetime.now()
-        self.matches = matches
-
-    # initialiser le 1er round quand le tournois est créé
-    def initialize_round(self):
-
-
-        #######    Ajout d'informations sur le round
-
-
-        launch_round = []
-        launch_round.append("Round n°" + str(len(LIST_ROUNDS) + 1))
-        launch_round.append(str(self.start))
-        launch_round.append(None)
-        launch_round.append(self.matches)
-        LIST_ROUNDS.append(launch_round)
-
-
-
-
-        #######   add player subscribed in list
-
-
-        list_player = []
-        for item in TOURNOIS_LIST[-1][2]:
-            list_player.append(item)
-
-
-        #######   function to divide list of players subscribed in 2 lists
-
-
-        def split_list(list_player):
-            half = len(list_player) // 2
-
-            first_list = list_player[:half]
-            second_list = list_player[half:]
-
-            zip(first_list, second_list)
-
-            print(zip(first_list, second_list))
-
-            # créer des paires de match avec la fonction zip
-            return list(zip(first_list, second_list))
-
-        list_of_match = split_list(list_player)
-
-
-
-        #######  définir les matchs pour le round à partir de la liste
-
-
-        def match_for_round():
-
-            numero_paire = 0
-
-            for match in list_of_match:
-                numero_paire += 1
-                duel = []
-                joueur_1 = []
-                joueur_2 = []
-
-                joueur_1.append(match[0][0])
-                joueur_1.append(0)
-
-                joueur_2.append(match[1][0])
-                joueur_2.append(0)
-
-                duel.append(joueur_1)
-                duel.append(joueur_2)
-
-                self.matches.append(duel)
-
-                print(f'Paire n°: {numero_paire}', ".", match[0][0], " VS ", match[1][0])
-
-        match_for_round()
-
-
-        ######    Display information about round
-
-        print("")
-        print("Vous avez créé un Round !")
-        print("")
-        print(LIST_ROUNDS)
-        print("")
-
-
-
-    ######   Créer un nouveau round
-
-    def new_round(self):
-        pass
-
-
-
-    def end_round(self):
-        self.date_fin = datetime.now()
-
-
-    def save(self):
-
-        item_round = []
-        item_round.append(self.date_creation)
-        item_round.append(self.date_fin)
-        item_round.append(self.matches)
-        LIST_ROUNDS.append(item_round)
-        return item_round
-        pass
 
 
 class Tournois():
@@ -256,7 +189,6 @@ class Tournois():
 
 
     def save(self):
-
         item_tournois = []
         item_tournois.append(self.nom)
         item_tournois.append(self.lieu)
@@ -271,4 +203,3 @@ class Tournois():
 
         return item_tournois
         pass
-
