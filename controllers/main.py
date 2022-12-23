@@ -1,5 +1,5 @@
 from views.display import Display
-from models.all import Player
+from models.all import Player, PLAYER_SUBSCRIBED, TOURNOIS_LIST, LIST_OF_DUEL, LIST_ROUNDS
 
 
 
@@ -73,17 +73,19 @@ class PlayerController:
             if (response == 1):
                 PlayerController().create_player()
 
-
             elif (response == 2):
-                TournoisController().menu_tournois()
+                PlayerController().delete_player()
 
             elif (response == 3):
-                RapportController().menu_rapports()
+                TournoisController().menu_tournois()
 
             elif (response == 4):
-                SaveController().menu_save()
+                RapportController().menu_rapports()
 
             elif (response == 5):
+                SaveController().menu_save()
+
+            elif (response == 6):
                 exit()
 
             else:
@@ -118,3 +120,35 @@ class PlayerController:
         self.display.affiche("*********************************************************")
         self.menu_players()
 
+    def delete_player(self):
+
+        if len(PLAYER_SUBSCRIBED) == 0:
+            print("")
+            print("Il n'y a pas de joueurs à supprimer")
+            print("")
+
+        else:
+            self.display.affiche("                                       ")
+            quantite = 0
+
+            for item in PLAYER_SUBSCRIBED:
+                quantite += 1
+                print(quantite, ".", item[0], item[1], f' | classement : {item[-1]}')
+            self.display.affiche("                                       ")
+            self.display.affiche("                                       ")
+
+            response = self.display.get_input('Choisissez le bon numéro pour supprimer le joueur de votre choix :  ',
+                                              'number')
+
+            if response > quantite:
+                print("")
+                print("Ce numéro de joueurs n'existe pas !  Retour au menu.")
+                print("")
+
+            else:
+                deleting = PLAYER_SUBSCRIBED.pop(response - 1)
+                print("")
+                print("Le joueur a été supprimé ! ")
+                print("")
+
+            PlayerController().menu_players()
