@@ -174,8 +174,6 @@ class PlayerController:
 
         PlayerController().menu_players()
 
-
-
     def update_ranking_player(self):
 
         if len(PLAYER_SUBSCRIBED) == 0:
@@ -200,11 +198,15 @@ class PlayerController:
             print("")
 
             def update_ranking(response):
-                updating = input(f"changez le classement du joueur : {PLAYER_SUBSCRIBED[response - 1][0]} ")
+                updating = input(f"Chosissez le nouveau n° de classement du joueur  {PLAYER_SUBSCRIBED[response - 1][0]} :  ")
 
                 PLAYER_SUBSCRIBED[response - 1][-1] = int(updating)
+                print("")
+                print("")
 
                 return print(PLAYER_SUBSCRIBED[response - 1][0],
                              f" est maintenant classé(e) à la place n°{PLAYER_SUBSCRIBED[response - 1][-1]}")
 
             print(update_ranking(response))
+
+        PlayerController().menu_players()
