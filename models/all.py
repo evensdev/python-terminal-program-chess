@@ -73,39 +73,6 @@ LIST_ROUNDS = [
      ],
          ]
 
-TOURNOIS_LIST = [
-
-    ['The Wars', 'Paris',
-     ['Tom', 'JOSEPH', '04/06/2027', 'm', '1'],
-     ['Kerry', 'JOSEPH', '04/06/2027', 'm', '2'],
-     ['Jess', 'JOSEPH', '04/06/2027', 'm', '3'],
-     ['Linda', 'JOSEPH', '04/06/2027', 'm', '4'],
-     ['Max', 'JOSEPH', '04/06/2027', 'm', '5'],
-     ['Gerald', 'JOSEPH', '04/06/2027', 'm', '6'],
-     ['Sabine', 'JOSEPH', '04/06/2027', 'm', '7'],
-     ['Oscar', 'JOSEPH', '04/06/2027', 'm', '8'],
-     'un bullet', 'RAS',
-     datetime.datetime(2022, 8, 10, 14, 25, 22, 195002), 4, [LIST_ROUNDS]],
-
-
-    ['Armagedon', 'New-York',
-
-                 [['Tom', 'JOSEPH', '04/06/2027', 'm', '1'],
-    ['Kerry', 'JOSEPH', '04/06/2027', 'm', '2'],
-    ['Jess', 'JOSEPH', '04/06/2027', 'm', '3'],
-    ['Linda', 'JOSEPH', '04/06/2027', 'm', '4'],
-    ['Max', 'JOSEPH', '04/06/2027', 'm', '5'],
-    ['Gerald', 'JOSEPH', '04/06/2027', 'm', '6'],
-    ['Sabine', 'JOSEPH', '04/06/2027', 'm', '7'],
-    ['Oscar', 'JOSEPH', '04/06/2027', 'm', '8']],
-                 'un bullet', 'RAS',
-                 datetime.datetime(2022, 8, 11, 20, 25, 22, 195001), 4, [LIST_ROUNDS]]]
-
-
-
-
-
-
 
 
 TOURNOIS_LIST = [
