@@ -103,11 +103,6 @@ TOURNOIS_LIST = [
                  datetime.datetime(2022, 8, 11, 20, 25, 22, 195001), 4, [LIST_ROUNDS]]]
 
 
-
-
-
-
-
 class Player:
 
     def __init__(self, prenom, nom, date_naissance, genre, classement):
@@ -129,3 +124,82 @@ class Player:
 
         return list_player
 
+
+
+class Tournois():
+
+    def __init__(self, nom=None,
+                 lieu=None,
+                 joueurs=[],
+                 temps=None,
+                 description=None,
+                 date=datetime.datetime.now(),
+                 nombre_tours=4, tournees=[]):
+
+        self.nom = nom
+        self.lieu = lieu
+        self.joueurs = joueurs
+        self.temps = temps
+        self.description = description
+        self.date = date
+        self.nombre_tours = nombre_tours
+        self.tournees = tournees
+
+    def make_tournament(self):
+
+        def add_player_tournament():
+            print("                                       ")
+            print("-------------------------------------------------- ")
+            print("Ajouter des joueurs")
+            print("-------------------------------------------------- ")
+            print("                                       ")
+
+            quantite = 0
+            for item in PLAYER_SUBSCRIBED:
+                quantite += 1
+                print(quantite, ".", item[0], item[1])
+
+            print("")
+
+            joueurs_preselect = []
+            nb_players = 8
+
+            while nb_players > 0:
+                player_subscribe = input('Inscrivez un joueur en renseignant son numéro parmi la liste : ')
+
+                if int(player_subscribe) <= len(PLAYER_SUBSCRIBED) + 1 and int(player_subscribe) > 0:
+                    self.joueurs.append(PLAYER_SUBSCRIBED[int(player_subscribe) - 1])
+                    nb_players -= 1
+                    print("-------------------------------------------------- ")
+                    print(PLAYER_SUBSCRIBED[int(player_subscribe) - 1][0], "est inscrit !")
+                    print(nb_players)
+
+                else:
+                    print("-------------------------------------------------- ")
+                    response = self.display.get_input('Votre choix est incorrect, réessayez')
+            else:
+                print("Tous les joueurs sont inscrits pour ce tournois")
+                self.save()
+            print('Le Tournoi  a bien a bien été créé, retour au menu précédent')
+        self.nom = input('Renseignez le Nom du Tournoi : ')
+        self.lieu = input('Renseignez le Lieu du Tournoi : ')
+        self.temps = input('Chosissez votre coup | "un bullet", "un blitz" ou un "coup rapide" : ')
+        self.description = input('Renseignez les Remarques sur le Tournoi : ')
+        self.joueurs = add_player_tournament()
+
+
+    def save(self):
+        item_tournois = []
+        item_tournois.append(self.nom)
+        item_tournois.append(self.lieu)
+        item_tournois.append(self.joueurs)
+        item_tournois.append(self.temps)
+        item_tournois.append(self.description)
+        item_tournois.append(self.date)
+        item_tournois.append(self.nombre_tours)
+        item_tournois.append(self.tournees)
+
+        TOURNOIS_LIST.append(item_tournois)
+
+        return item_tournois
+        pass
