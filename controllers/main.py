@@ -210,3 +210,55 @@ class PlayerController:
             print(update_ranking(response))
 
         PlayerController().menu_players()
+
+
+# Gestion des tournois
+class TournoisController:
+
+    def __init__(self):
+        self.display = Display()
+
+    # Afficher le menu du tournois
+    def menu_tournois(self):
+
+        self.display.affiche("                                       ")
+        self.display.affiche("---------------------------------------")
+        self.display.affiche("Voici le menu du Tournoi")
+        self.display.affiche("---------------------------------------")
+        self.display.affiche("                                       ")
+
+        menu = ["Créer un nouveau tournoi", "Démarrer un nouveau Round", "Entrer/Modifier les résultats",
+                "Mettre à jour le classement des Joueurs du Tournoi", "Voir la liste des tournois",
+                "Clotûrer le Tournoi", "Retour"]
+        self.display.affiche_menu(menu)
+        self.display.affiche("                                       ")
+        response = self.display.get_input('Choisissez un chiffre pour aller sur le menu de votre choix :  ', 'number')
+
+        if (response == 1):
+            TournoisController().create_tournois()
+
+        elif (response == 2):
+            # Avec Ny, il s'agit de générer une paire de joueurs
+            TournoisController().create_round()
+
+        elif (response == 3):
+            # Mettre à jour les résultats des joueurs
+            TournoisController().update_result()
+
+        elif (response == 4):
+            TournoisController().update_ranking()
+
+        elif response == 5:
+            # Liste de tous les Tournois
+            RapportController().list_of_tournament()
+
+        elif (response == 6):
+            MainController().main()
+
+        elif (response == 7):
+            MainController().main()
+
+        else:
+            self.display.affiche("-------------------------------------------------- ")
+            response = self.display.get_input('Votre choix est incorrect, réessayez : ', "number")
+
