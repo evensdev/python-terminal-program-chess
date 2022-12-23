@@ -218,6 +218,7 @@ class TournoisController:
     def __init__(self):
         self.display = Display()
 
+
     # Afficher le menu du tournois
     def menu_tournois(self):
 
@@ -262,3 +263,21 @@ class TournoisController:
             self.display.affiche("-------------------------------------------------- ")
             response = self.display.get_input('Votre choix est incorrect, réessayez : ', "number")
 
+
+    # Créer un tournois
+    def create_tournois(self):
+
+        self.display.affiche("                                       ")
+        self.display.affiche("-------------------------------------------------- ")
+        self.display.affiche("Création d'un Nouveau Tournoi")
+        self.display.affiche("-------------------------------------------------- ")
+        self.display.affiche("                                       ")
+
+        if len(PLAYER_SUBSCRIBED) < 8:
+            print("Vous n'avez pas assez de joueurs inscrits pour créer un tournoi.")
+            print("Il vous faut 8 joueurs inscrits au minimum")
+            print("")
+        else:
+            Tournois().make_tournament()
+
+        self.menu_tournois()
