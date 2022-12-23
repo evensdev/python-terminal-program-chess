@@ -77,16 +77,14 @@ class PlayerController:
                 PlayerController().delete_player()
 
             elif (response == 3):
-                TournoisController().menu_tournois()
+                PlayerController().list_of_player()
 
-            elif (response == 4):
-                RapportController().menu_rapports()
+            elif response == 4:
+                PlayerController().update_ranking_player()
 
-            elif (response == 5):
-                SaveController().menu_save()
+            elif response == 5:
+                MainController().main()
 
-            elif (response == 6):
-                exit()
 
             else:
                 self.display.affiche("-------------------------------------------------- ")
@@ -152,3 +150,61 @@ class PlayerController:
                 print("")
 
             PlayerController().menu_players()
+
+    def list_of_player(self):
+
+
+
+        if len(PLAYER_SUBSCRIBED) == 0:
+            print("")
+            print("Il n'y a pas de joueurs inscrits. Veuillez en ajouter en créant des joueurs")
+
+        else:
+            self.display.affiche("                                       ")
+            quantite = 0
+
+            for item in PLAYER_SUBSCRIBED:
+                quantite += 1
+                print(quantite, ".", item[0], item[1], f' | classement : {item[-1]}')
+
+
+
+            self.display.affiche("                                       ")
+            self.display.affiche("                                       ")
+
+        PlayerController().menu_players()
+
+
+
+    def update_ranking_player(self):
+
+        if len(PLAYER_SUBSCRIBED) == 0:
+            print("")
+            print("Il n'y a pas de joueurs inscrits. Veuillez créer des joueurs pour modifier leur classement")
+        else:
+            numero = 0
+
+            print("")
+            print("============================================================================")
+            print("Choisissez le bon index pour modifier le classement du joueur de votre choix")
+            print("============================================================================")
+            print("")
+
+            for player in PLAYER_SUBSCRIBED:
+                numero += 1
+                print(numero, " . ", player[0], "  classement : ", player[-1])
+
+            print("")
+            response = input("Sélectionner votre joueur en choisissant le bon numéro :   ")
+            response = int(response)
+            print("")
+
+            def update_ranking(response):
+                updating = input(f"changez le classement du joueur : {PLAYER_SUBSCRIBED[response - 1][0]} ")
+
+                PLAYER_SUBSCRIBED[response - 1][-1] = int(updating)
+
+                return print(PLAYER_SUBSCRIBED[response - 1][0],
+                             f" est maintenant classé(e) à la place n°{PLAYER_SUBSCRIBED[response - 1][-1]}")
+
+            print(update_ranking(response))
