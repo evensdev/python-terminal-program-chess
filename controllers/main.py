@@ -1,5 +1,5 @@
 from views.display import Display
-from models.all import Player, PLAYER_SUBSCRIBED, TOURNOIS_LIST, LIST_OF_DUEL, LIST_ROUNDS, Tournois
+from models.all import Player, PLAYER_SUBSCRIBED, TOURNOIS_LIST, LIST_ROUNDS, Tournois, Rounds
 
 
 
@@ -279,5 +279,14 @@ class TournoisController:
             print("")
         else:
             Tournois().make_tournament()
+            Rounds().initialize_round()
 
         self.menu_tournois()
+
+
+    # Créer un match
+    def create_round(self):
+        print("Ceci est un test")
+
+
+
