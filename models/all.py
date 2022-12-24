@@ -164,26 +164,32 @@ class Rounds:
         ######    Display information about round
 
         print("")
-        print("Vous avez créé un Round !")
         print("")
-        print(LIST_ROUNDS)
+        #print(LIST_ROUNDS[-1][3])
         print("")
 
 
 
-    ######   Créer un nouveau round
+
+    ######  Créer un nouveau round
+
+    #def new_round(self):
 
 
+
+
+    def end_round(self):
+        self.date_fin = datetime.now()
 
 
     def save(self):
 
         item_round = []
-        item_round.append(self.date_creation)
-        item_round.append(self.date_fin)
+        item_round.append(self.start)
+        item_round.append(self.end)
         item_round.append(self.matches)
         LIST_ROUNDS.append(item_round)
-        return item_round
+        #return item_round
         pass
 
 
@@ -240,8 +246,13 @@ class Tournois():
                     response = self.display.get_input('Votre choix est incorrect, réessayez')
             else:
                 print("Tous les joueurs sont inscrits pour ce tournois")
+                print('')
                 self.save()
-            print('Le Tournoi  a bien a bien été créé, retour au menu précédent')
+            print('Le Tournoi  a bien a bien été créé')
+            print('')
+            print('Voici la liste des matchs du Round n°1')
+            print('')
+
         self.nom = input('Renseignez le Nom du Tournoi : ')
         self.lieu = input('Renseignez le Lieu du Tournoi : ')
         self.temps = input('Chosissez votre coup | "un bullet", "un blitz" ou un "coup rapide" : ')

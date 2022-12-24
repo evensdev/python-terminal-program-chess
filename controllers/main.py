@@ -247,7 +247,7 @@ class TournoisController:
             TournoisController().update_result()
 
         elif (response == 4):
-            TournoisController().update_ranking()
+            PlayerController().update_ranking()
 
         elif response == 5:
             # Liste de tous les Tournois
@@ -280,6 +280,8 @@ class TournoisController:
         else:
             Tournois().make_tournament()
             Rounds().initialize_round()
+            #Rounds().save()
+            print("Sauvegarde de la liste round", LIST_ROUNDS)
 
         self.menu_tournois()
 
@@ -287,6 +289,55 @@ class TournoisController:
     # Créer un match
     def create_round(self):
         print("Ceci est un test")
+
+
+    def update_result(self):
+
+        for item in LIST_ROUNDS[-1][3]:
+
+            print("")
+            numero = 1
+
+            print("")
+            print("")
+            print("Désignez le vainqueur de ce match ")
+            print("--------------------------------- ")
+
+            print("1 . ", item[0][0])
+            print("2 . ", item[1][0])
+            print("0 .  Match nul")
+            print("")
+
+            response = self.display.get_input('Qui est le vainqueur du match ? Choisissez le chiffre 1, 2 ou 0 :   ',
+                                              'number')
+
+            if (response == 1):
+                item[0][1] += 1
+
+                print("")
+                print(item[0][0], " est le vainqueur de ce match !")
+                print(item[0])
+
+            elif (response == 2):
+                item[1][1] += 1
+
+                print("")
+                print(item[1][0], " est le vainqueur de ce match !")
+                print(item[1])
+
+            elif (response == 0):
+                item[0][1] += 0.5
+                item[1][1] += 0.5
+
+                print("")
+                print("Match nul entre ", item[0][0], " et ", item[1][0], " ! ")
+                print(item[0], item[1])
+
+            else:
+                print("Pas bon du tout !!!!!")
+
+
+
 
 
 
