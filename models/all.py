@@ -173,13 +173,7 @@ class Rounds:
 
     ######   Créer un nouveau round
 
-    def new_round(self):
-        pass
 
-
-
-    def end_round(self):
-        self.date_fin = datetime.now()
 
 
     def save(self):
