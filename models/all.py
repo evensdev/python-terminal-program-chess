@@ -125,6 +125,112 @@ class Player:
         return list_player
 
 
+class Rounds:
+    def __init__(self,
+                 start = datetime.datetime.now(),
+                 end = str(),
+                 matches = []):
+
+        self.start = datetime.datetime.now()
+        self.end = datetime.datetime.now()
+        self.matches = matches
+
+    # initialiser le 1er round quand le tournois est créé
+    def initialize_round(self):
+
+
+        #######    Ajout d'informations sur le round
+
+
+        launch_round = []
+        launch_round.append("Round n°" + str(len(LIST_ROUNDS) + 1))
+        launch_round.append(str(self.start))
+        launch_round.append(None)
+        launch_round.append(self.matches)
+        LIST_ROUNDS.append(launch_round)
+
+
+
+
+        #######   add player subscribed in list
+
+
+        list_player = []
+        for item in TOURNOIS_LIST[-1][2]:
+            list_player.append(item)
+
+
+        #######   function to divide list of players subscribed in 2 lists
+
+
+        def split_list(list_player):
+            half = len(list_player) // 2
+
+            first_list = list_player[:half]
+            second_list = list_player[half:]
+
+            zip(first_list, second_list)
+
+            print(zip(first_list, second_list))
+
+            # créer des paires de match avec la fonction zip
+            return list(zip(first_list, second_list))
+
+        list_of_match = split_list(list_player)
+
+
+
+        #######  définir les matchs pour le round à partir de la liste
+
+
+        def match_for_round():
+
+            numero_paire = 0
+
+            for match in list_of_match:
+                numero_paire += 1
+                duel = []
+                joueur_1 = []
+                joueur_2 = []
+
+                joueur_1.append(match[0][0])
+                joueur_1.append(0)
+
+                joueur_2.append(match[1][0])
+                joueur_2.append(0)
+
+                duel.append(joueur_1)
+                duel.append(joueur_2)
+
+                self.matches.append(duel)
+
+                print(f'Paire n°: {numero_paire}', ".", match[0][0], " VS ", match[1][0])
+
+        match_for_round()
+
+
+        ######    Display information about round
+
+        print("")
+        print("")
+        #print(LIST_ROUNDS[-1][3])
+        print("")
+
+
+
+
+    ######  Créer un nouveau round
+
+    #def new_round(self):
+
+
+
+
+    def end_round(self):
+        self.date_fin = datetime.now()
+
+
+   
 
 class Tournois():
 
@@ -179,14 +285,18 @@ class Tournois():
                     response = self.display.get_input('Votre choix est incorrect, réessayez')
             else:
                 print("Tous les joueurs sont inscrits pour ce tournois")
+                print('')
                 self.save()
-            print('Le Tournoi  a bien a bien été créé, retour au menu précédent')
+            print('Le Tournoi  a bien a bien été créé')
+            print('')
+            print('Voici la liste des matchs du Round n°1')
+            print('')
+
         self.nom = input('Renseignez le Nom du Tournoi : ')
         self.lieu = input('Renseignez le Lieu du Tournoi : ')
         self.temps = input('Chosissez votre coup | "un bullet", "un blitz" ou un "coup rapide" : ')
         self.description = input('Renseignez les Remarques sur le Tournoi : ')
         self.joueurs = add_player_tournament()
-
 
     def save(self):
         item_tournois = []
