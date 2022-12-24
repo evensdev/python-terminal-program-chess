@@ -287,7 +287,7 @@ class TournoisController:
 
     # Créer un match
     def create_round(self):
-        print("Ceci est un test")
+        Rounds().new_round()
 
 
     def update_result(self):
@@ -335,7 +335,7 @@ class TournoisController:
             else:
                 print("Pas bon du tout !!!!!")
 
-
+        Rounds().end_round()
 
 
         self.menu_tournois()

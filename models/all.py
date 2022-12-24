@@ -75,32 +75,8 @@ LIST_ROUNDS = [
 
 
 
-TOURNOIS_LIST = [
 
-    ['The Wars', 'Paris',
-     ['Tom', 'JOSEPH', '04/06/2027', 'm', '1'],
-     ['Kerry', 'JOSEPH', '04/06/2027', 'm', '2'],
-     ['Jess', 'JOSEPH', '04/06/2027', 'm', '3'],
-     ['Linda', 'JOSEPH', '04/06/2027', 'm', '4'],
-     ['Max', 'JOSEPH', '04/06/2027', 'm', '5'],
-     ['Gerald', 'JOSEPH', '04/06/2027', 'm', '6'],
-     ['Sabine', 'JOSEPH', '04/06/2027', 'm', '7'],
-     ['Oscar', 'JOSEPH', '04/06/2027', 'm', '8'],
-     'un bullet', 'RAS', datetime.datetime(2022, 8, 10, 14, 25, 22, 195002), 4, [LIST_ROUNDS]],
-
-
-    ['Armagedon', 'New-York',
-
-                 [['Tom', 'JOSEPH', '04/06/2027', 'm', '1'],
-    ['Kerry', 'JOSEPH', '04/06/2027', 'm', '2'],
-    ['Jess', 'JOSEPH', '04/06/2027', 'm', '3'],
-    ['Linda', 'JOSEPH', '04/06/2027', 'm', '4'],
-    ['Max', 'JOSEPH', '04/06/2027', 'm', '5'],
-    ['Gerald', 'JOSEPH', '04/06/2027', 'm', '6'],
-    ['Sabine', 'JOSEPH', '04/06/2027', 'm', '7'],
-    ['Oscar', 'JOSEPH', '04/06/2027', 'm', '8']],
-                 'un bullet', 'RAS',
-                 datetime.datetime(2022, 8, 11, 20, 25, 22, 195001), 4, [LIST_ROUNDS]]]
+TOURNOIS_LIST = []
 
 
 class Player:
@@ -221,13 +197,113 @@ class Rounds:
 
     ######  Créer un nouveau round
 
-    #def new_round(self):
+    def new_round(self):
+        if len(LIST_ROUNDS) < 4 :
+
+            if LIST_ROUNDS[-1][2] == None:
+                print("")
+                print("")
+                print("Vous n'avez pas mis à jour les résultats du précédent round")
+                print("Veuillez mettre à jour les scores en tapant sur la touche n°3")
+                print("")
+                print("")
+
+            else:
+
+                if len(LIST_ROUNDS) < 2:
+
+                    print("OPTION 1")
+                    ranking_round = []
+
+                    for item in LIST_ROUNDS[-1][3]:
+
+                        for player in item:
+                            ranking_round.append(player)
+
+                    ranking_round = sorted(ranking_round, key=lambda ranking: ranking[-1], reverse=True)
+
+
+                    def split_list(list_player):
+                        half = len(list_player) // 2
+
+                        first_list = list_player[:half]
+
+                        second_list = list_player[half:]
+
+                        zip(first_list, second_list)
+
+                        print(zip(first_list, second_list))
+
+                        # créer des paires de match avec la fonction zip
+                        return list(zip(first_list, second_list))
+
+
+
+                    second_round = split_list(ranking_round)
+
+                    print(second_round)
+
+                    # Enregistrer le round dans la liste
+
+
+                    launch_round = []
+                    launch_round.append("Round n°" + str(len(LIST_ROUNDS) + 1))
+                    launch_round.append(str(self.start))
+                    launch_round.append(None)
+                    launch_round.append(second_round)
+                    LIST_ROUNDS.append(launch_round)
+
+                    print("")
+                    print("Le round n°",len(LIST_ROUNDS), " est prêt")
+                    print("Vous pouvez entrer les résultats des nouveaux matchs en sélectionnant la touche 3' ")
+                    print("")
+
+                    print(LIST_ROUNDS)
+
+                else :
+                    print("OPTION 2")
+                    ranking_round = []
+
+                    for item in LIST_ROUNDS[1][3]:
+
+                        for player in item:
+                            ranking_round.append(player)
+
+                        ranking_round = sorted(ranking_round, key=lambda ranking: ranking[-1], reverse=True)
+
+
+                    duel_ready_to_control = []
+                    duel_ready_to_control.append([ranking_round[0], ranking_round[1]])
+                    duel_ready_to_control.append([ranking_round[2], ranking_round[3]])
+                    duel_ready_to_control.append([ranking_round[4], ranking_round[5]])
+                    duel_ready_to_control.append([ranking_round[6], ranking_round[7]])
+
+                    launch_round = []
+                    launch_round.append("Round n°" + str(len(LIST_ROUNDS) + 1))
+                    launch_round.append(None)
+                    launch_round.append(None)
+                    launch_round.append(duel_ready_to_control)
+                    LIST_ROUNDS.append(launch_round)
+
+                    print("")
+                    print("Le nouveau round est prêt")
+                    print("Vous pouvez entrer les résultats des nouveaux matchs en sélectionnant la touche 3' ")
+                    print("")
+
+                    #return print(LIST_ROUNDS)
+        else:
+            print("")
+            print("Vous avez déjà atteint les 4 rounds et entré les résultats.")
+            print("Tapez sur la touche 6 pour clotûrer le tournoi ")
+            print("")
+
+
 
 
 
 
     def end_round(self):
-        self.date_fin = datetime.now()
+        LIST_ROUNDS[-1][2] = datetime.datetime.now()
 
 
    
