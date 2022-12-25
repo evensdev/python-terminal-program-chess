@@ -247,11 +247,11 @@ class TournoisController:
             TournoisController().update_result()
 
         elif (response == 4):
-            PlayerController().update_ranking()
+            PlayerController().update_ranking_player()
 
         elif response == 5:
             # Liste de tous les Tournois
-            RapportController().list_of_tournament()
+            TournoisController().list_of_tournament()
 
         elif (response == 6):
             MainController().main()
@@ -290,6 +290,7 @@ class TournoisController:
         Rounds().new_round()
 
 
+    # Mise à jour des résultats
     def update_result(self):
 
         for item in LIST_ROUNDS[-1][3]:
@@ -338,4 +339,68 @@ class TournoisController:
         Rounds().end_round()
 
 
+
+    # Mise à jour du classement
+    def update_ranking_player(self):
+
+        if len(PLAYER_SUBSCRIBED) == 0:
+            print("")
+            print("Il n'y a pas de joueurs inscrits. Veuillez créer des joueurs pour modifier leur classement")
+        else:
+            numero = 0
+
+            print("")
+            print("============================================================================")
+            print("Choisissez le bon index pour modifier le classement du joueur de votre choix")
+            print("============================================================================")
+            print("")
+
+            for player in PLAYER_SUBSCRIBED:
+                numero += 1
+                print(numero, " . ", player[0], "  classement : ", player[-1])
+
+            print("")
+            response = input("Sélectionner votre joueur en choisissant le bon numéro :   ")
+            response = int(response)
+            print("")
+
+            def update_ranking(response):
+                updating = input(f"Chosissez le nouveau n° de classement du joueur  {PLAYER_SUBSCRIBED[response - 1][0]} :  ")
+
+                PLAYER_SUBSCRIBED[response - 1][-1] = int(updating)
+                print("")
+                print("")
+
+                return print(PLAYER_SUBSCRIBED[response - 1][0],
+                             f" est maintenant classé(e) à la place n°{PLAYER_SUBSCRIBED[response - 1][-1]}")
+
+            print(update_ranking(response))
+
+        PlayerController().menu_players()
+
+    #Liste de Tournois
+    def list_of_tournament(self):
+
+        # Liste de tous les Tournois
+
+        if len(TOURNOIS_LIST) == 0:
+            print("")
+            print("Il n'y a pas de tournois dans la liste. Veuillez créer un tournoi.")
+
+        else:
+
+            print("=============================")
+            print("Voici la liste des Tournois")
+            print("=============================")
+            print("")
+
+            index_item = 0
+
+            for item in TOURNOIS_LIST:
+                index_item += 1
+                print(index_item, " -- ", item[0])
+
+
+
         self.menu_tournois()
+
