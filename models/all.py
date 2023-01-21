@@ -28,7 +28,52 @@ PLAYER_SUBSCRIBED = [['Evens', 'JOSEPH', '13/06/1991', 'm', '1'],
 LIST_ROUNDS = []
 
 
-TOURNOIS_LIST = []
+# this List is full because testing, but the true version will be empty
+TOURNOIS_LIST = [['Al Nasser', 'Paris',
+                  [['Evens', 'JOSEPH', '13/06/1991', 'm', '1'],
+                   ['Elodie', 'JOSEPH', '28/11/1981', 'f', '2'],
+                   ['Nina', 'JOSEPH', '02/03/2023', 'f', '3'],
+                   ['Kylian', 'JOSEPH', '02/03/2023', 'm', '4'],
+                   ['Clara', 'JOSEPH', '02/03/2023', 'f', '5'],
+                   ['Chelsea', 'JOSEPH', '12/05/2025', 'f', '6'],
+                   ['Seven', 'JOSEPH', '12/05/2025', 'f', '7'],
+                   ['Elohim', 'JOSEPH', '04/06/2027', 'm', '8']],
+                  'bullet', 'RA', datetime.datetime(2023, 1, 21, 19, 11, 11, 627838), 4,
+                  [['Round n°1', '2023-01-21 19:11:26.350058', datetime.datetime(2023, 1, 21, 19, 11, 36, 147457),
+                    [[['Evens', 4], ['Clara', 1]], [['Elodie', 0], ['Chelsea', 2]],
+                     [['Nina', 1], ['Seven', 2]], [['Kylian', 2], ['Elohim', 3]]]],
+                   ['Round n°2', '2023-01-21 19:11:43.397692', datetime.datetime(2023, 1, 21, 19, 11, 47, 349600),
+                    [(['Evens', 4], ['Elodie', 0]), (['Seven', 2], ['Chelsea', 2]),
+                     (['Kylian', 2], ['Nina', 1]), (['Clara', 1], ['Elohim', 3])]],
+                   ['Round n°3', None, datetime.datetime(2023, 1, 21, 19, 11, 55, 29699),
+                    [[['Evens', 4], ['Kylian', 2]], [['Seven', 2], ['Chelsea', 2]], [['Elohim', 3], ['Elodie', 0]],
+                     [['Nina', 1], ['Clara', 1]]]],
+                   ['Round n°4', None, datetime.datetime(2023, 1, 21, 19, 12, 6, 201584),
+                    [[['Evens', 4], ['Chelsea', 2]], [['Kylian', 2], ['Elohim', 3]], [['Seven', 2], ['Clara', 1]], [['Elodie', 0], ['Nina', 1]]]]]],
+                 ['American Express', 'Paris',
+                  [['Evens', 'JOSEPH', '13/06/1991', 'm', '1'],
+                   ['Elodie', 'JOSEPH', '28/11/1981', 'f', '2'],
+                   ['Nina', 'JOSEPH', '02/03/2023', 'f', '3'],
+                   ['Kylian', 'JOSEPH', '02/03/2023', 'm', '4'],
+                   ['Clara', 'JOSEPH', '02/03/2023', 'f', '5'],
+                   ['Chelsea', 'JOSEPH', '12/05/2025', 'f', '6'],
+                   ['Seven', 'JOSEPH', '12/05/2025', 'f', '7'],
+                   ['Elohim', 'JOSEPH', '04/06/2027', 'm', '8']],
+                  'bullet', 'RA', datetime.datetime(2023, 1, 21, 19, 11, 11, 627838), 4,
+                  [['Round n°1', '2023-01-21 19:11:26.350058', datetime.datetime(2023, 1, 21, 19, 11, 36, 147457),
+                    [[['Evens', 4], ['Clara', 1]], [['Elodie', 0], ['Chelsea', 2]],
+                     [['Nina', 1], ['Seven', 2]], [['Kylian', 2], ['Elohim', 3]]]],
+                   ['Round n°2', '2023-01-21 19:11:43.397692', datetime.datetime(2023, 1, 21, 19, 11, 47, 349600),
+                    [(['Evens', 4], ['Elodie', 0]), (['Seven', 2], ['Chelsea', 2]),
+                     (['Kylian', 2], ['Nina', 1]), (['Clara', 1], ['Elohim', 3])]],
+                   ['Round n°3', None, datetime.datetime(2023, 1, 21, 19, 11, 55, 29699),
+                    [[['Evens', 4], ['Kylian', 2]], [['Seven', 2], ['Chelsea', 2]], [['Elohim', 3], ['Elodie', 0]],
+                     [['Nina', 1], ['Clara', 1]]]],
+                   ['Round n°4', None, datetime.datetime(2023, 1, 21, 19, 12, 6, 201584),
+                    [[['Evens', 4], ['Chelsea', 2]], [['Kylian', 2], ['Elohim', 3]], [['Seven', 2], ['Clara', 1]],
+                     [['Elodie', 0], ['Nina', 1]]]]]]
+                 ]
+
 
 
 class Player:

@@ -445,6 +445,10 @@ class RapportController:
             # Acteurs par classement
             RapportController().report_order_by_classement()
 
+        elif response == 3:
+            # Joueurs par ordre alphabétique d'un Tournoi
+            RapportController().report_order_by_alpabet_tournament()
+
 
 
     def order_actor_by_alphabet(self):
@@ -475,3 +479,47 @@ class RapportController:
         for item in sorted(PLAYER_SUBSCRIBED, key=lambda PLAYER: PLAYER[-1]):
             number += 1
             print(f" {number} -- {item[0]} || classement : n°{item[-1]} ")
+
+    def report_order_by_alpabet_tournament(self):
+
+        # Joueurs par ordre alphabétique d'un tournois
+
+        print("")
+        print("")
+        print("==========================================================")
+        print(
+            f"Sélectionnez le Tournois de votre choix ci-dessous  ")
+        print("==========================================================")
+        print("")
+
+        index_item = 0
+
+        for item in TOURNOIS_LIST:
+            index_item += 1
+            print(index_item, " -- ", item[0])
+
+        def ordering_player_tournament(tournament):
+
+            list_sorted = sorted(TOURNOIS_LIST[tournament][2])
+            index_item = 0
+
+            print("==========================================================")
+            print(
+                f"Voici la liste de joueurs du tournoi *** {TOURNOIS_LIST[tournament][0]} *** par ordre alphabétique : ")
+            print("==========================================================")
+            print("")
+
+            for item in list_sorted:
+                index_item += 1
+                print(f" {index_item} -- {item[0]}")
+
+        print("")
+        response = input("Choisissez votre tournoi en sélectionnant le bon numéro : ")
+        print("")
+
+        if response == str(1):
+            ordering_player_tournament(int(response) - 1)
+
+
+        elif response == str(2):
+            ordering_player_tournament(int(response) - 1)
