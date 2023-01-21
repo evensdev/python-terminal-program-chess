@@ -441,6 +441,12 @@ class RapportController:
             # Acteurs par ordre alphabétique
             RapportController().order_actor_by_alphabet()
 
+        elif response == 2:
+            # Acteurs par classement
+            RapportController().report_order_by_classement()
+
+
+
     def order_actor_by_alphabet(self):
 
         print("")
@@ -455,3 +461,17 @@ class RapportController:
             number += 1
             print(f" {number} -- {item[0]}")
 
+    def report_order_by_classement(self):
+
+        # Acteurs par classement
+
+        print("==========================================================")
+        print("Voici la liste d'Acteurs par Ordre de Classement : ")
+        print("==========================================================")
+
+        number = 0
+
+        # les paramètres de la fonctions permettent de classer en fonction de l'élément de liste de mon choixs
+        for item in sorted(PLAYER_SUBSCRIBED, key=lambda PLAYER: PLAYER[-1]):
+            number += 1
+            print(f" {number} -- {item[0]} || classement : n°{item[-1]} ")
