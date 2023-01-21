@@ -6,7 +6,6 @@ db = TinyDB('db.json')
 
 
 # LISTE DE JOUEURS INSCRITS
-
 PLAYER_SUBSCRIBED = [['Evens', 'JOSEPH', '13/06/1991', 'm', '1'],
                   ['Elodie', 'JOSEPH', '28/11/1981', 'f', '2'],
                   ['Nina', 'JOSEPH', '02/03/2023', 'f', '3'],
@@ -25,7 +24,56 @@ PLAYER_SUBSCRIBED = [['Evens', 'JOSEPH', '13/06/1991', 'm', '1'],
                      ['Oscar', 'JOSEPH', '04/06/2027', 'm', '8']
                      ]
 
-LIST_ROUNDS = []
+LIST_OF_DUEL = [[
+
+    [['Evens', 0], ['Clara', 0]],
+       [['Elodie', 0], ['Chelsea', 0]],
+       [['Nina', 0], ['Kylian', 0]],
+       [['Kylian', 0], ['Elohim', 0]]
+    ],
+               [[['Evens', 0], ['Elodie', 0]],
+       [['Kylian', 0], ['Chelsea', 0]],
+       [['Nina', 0], ['Clara', 0]],
+       [['Clara', 0], ['Seven', 0]]
+    ],
+               [[['Evens', 0], ['Chelsea', 0]],
+       [['Elodie', 0], ['Seven', 0]],
+       [['Nina', 0], ['Seven', 0]],
+       [['Kylian', 0], ['Clara', 0]]
+    ],
+               [[['Evens', 0], ['Seven', 0]],
+       [['Elodie', 0], ['Elohim', 0]],
+       [['Nina', 0], ['Elohim', 0]],
+       [['Kylian', 0], ['Elohim', 0]]
+    ]]
+
+
+
+LIST_ROUNDS = [
+
+    ["Round n°1",
+    datetime.datetime(2022, 8, 10, 14, 25, 22, 195002),
+     datetime.datetime(2022, 8, 10, 17, 25, 22, 195002),
+     [LIST_OF_DUEL[0]]
+     ],
+    ["Round n°2",
+    datetime.datetime(2022, 8, 10, 14, 25, 22, 195002),
+     datetime.datetime(2022, 8, 10, 17, 25, 22, 195002),
+     [LIST_OF_DUEL[1]]
+     ],
+    ["Round n°3",
+    datetime.datetime(2022, 8, 10, 14, 25, 22, 195002),
+     datetime.datetime(2022, 8, 10, 17, 25, 22, 195002),
+     [LIST_OF_DUEL[2]]
+     ],
+    ["Round n°4",
+    datetime.datetime(2022, 8, 10, 14, 25, 22, 195002),
+     datetime.datetime(2022, 8, 10, 17, 25, 22, 195002),
+     [LIST_OF_DUEL[3]]
+     ],
+         ]
+
+
 
 
 TOURNOIS_LIST = []
@@ -255,16 +303,7 @@ class Rounds:
         LIST_ROUNDS[-1][2] = datetime.datetime.now()
 
 
-    def save(self):
-
-        item_round = []
-        item_round.append(self.start)
-        item_round.append(self.end)
-        item_round.append(self.matches)
-        LIST_ROUNDS.append(item_round)
-        #return item_round
-        pass
-
+   
 
 class Tournois():
 
@@ -332,9 +371,7 @@ class Tournois():
         self.description = input('Renseignez les Remarques sur le Tournoi : ')
         self.joueurs = add_player_tournament()
 
-
     def save(self):
-
         item_tournois = []
         item_tournois.append(self.nom)
         item_tournois.append(self.lieu)
@@ -348,7 +385,7 @@ class Tournois():
         TOURNOIS_LIST.append(item_tournois)
 
         return item_tournois
-        pass
+
 
     def update_nombre_tours(self):
         self.nombre_tours += 1
