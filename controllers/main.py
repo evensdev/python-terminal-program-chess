@@ -1,5 +1,5 @@
 from views.display import Display
-from models.all import Player, PLAYER_SUBSCRIBED, TOURNOIS_LIST, LIST_ROUNDS, Tournois, Rounds
+from models.all import Player, PLAYER_SUBSCRIBED, TOURNOIS_LIST, LIST_OF_DUEL, LIST_ROUNDS, Tournois
 
 
 
@@ -282,7 +282,6 @@ class TournoisController:
         else:
             Tournois().make_tournament()
             Rounds().initialize_round()
-            #Rounds().save()
             print("Sauvegarde de la liste round", LIST_ROUNDS)
 
         self.menu_tournois()
@@ -411,3 +410,7 @@ class TournoisController:
     def close_tournament(self):
         TOURNOIS_LIST[-1][-1] = LIST_ROUNDS
         Tournois().close_tournament()
+
+
+        self.menu_tournois()
+
