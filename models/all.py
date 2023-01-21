@@ -111,7 +111,7 @@ class Rounds:
         self.end = datetime.datetime.now()
         self.matches = matches
 
-    # initialiser le 1er round quand le tournois est créé
+    # initialiser le 1er round quand le tournoi est créé
     def initialize_round(self):
 
 
@@ -193,8 +193,6 @@ class Rounds:
         print("")
 
 
-
-
     ######  Créer un nouveau round
 
     def new_round(self):
@@ -209,6 +207,8 @@ class Rounds:
                 print("")
 
             else:
+
+                TOURNOIS_LIST[-1][-2] += 1
 
                 if len(LIST_ROUNDS) < 2:
 
@@ -286,7 +286,7 @@ class Rounds:
                     LIST_ROUNDS.append(launch_round)
 
                     print("")
-                    print("Le nouveau round est prêt")
+                    print("Le round n°",len(LIST_ROUNDS), " est prêt")
                     print("Vous pouvez entrer les résultats des nouveaux matchs en sélectionnant la touche 3' ")
                     print("")
 
@@ -294,11 +294,8 @@ class Rounds:
         else:
             print("")
             print("Vous avez déjà atteint les 4 rounds et entré les résultats.")
-            print("Tapez sur la touche 6 pour clotûrer le tournoi ")
+            print("Tapez sur la touche 6 pour clôturer le tournoi ou si c'est déjà fait, vous pouvez créer un nouveau tournoi ! ")
             print("")
-
-
-
 
 
 
@@ -316,7 +313,7 @@ class Tournois():
                  temps=None,
                  description=None,
                  date=datetime.datetime.now(),
-                 nombre_tours=4, tournees=[]):
+                 nombre_tours=1, tournees=[]):
 
         self.nom = nom
         self.lieu = lieu
@@ -360,7 +357,7 @@ class Tournois():
                     print("-------------------------------------------------- ")
                     response = self.display.get_input('Votre choix est incorrect, réessayez')
             else:
-                print("Tous les joueurs sont inscrits pour ce tournois")
+                print("Tous les joueurs sont inscrits pour ce tournoi")
                 print('')
                 self.save()
             print('Le Tournoi  a bien a bien été créé')
@@ -388,4 +385,36 @@ class Tournois():
         TOURNOIS_LIST.append(item_tournois)
 
         return item_tournois
-        pass
+
+
+    def update_nombre_tours(self):
+        self.nombre_tours += 1
+
+
+    def close_tournament(self):
+
+        print(TOURNOIS_LIST[-1][-2])
+
+        if TOURNOIS_LIST[-1][-2] < 4:
+            print("")
+            print("Le Tournoi n'est pas encore terminé")
+            print("Veuillez compléter tous les rounds afin de clôturer le Tournoi")
+            print("")
+
+        else:
+            print("")
+            print("Le Tournoi est maintenant clôturé !")
+            print("Cela signifie que : ")
+            print("- Vous ne pourrez plus modifier les résultats du tournoi clôturé")
+            print("- Vous ne pourrez plus créer de nouveau round sur le tournoi clôturé")
+            print("")
+
+            # Element ci-dessous à effacer après avoir vérifié tournois_list
+            print("RECAPITULATIF DE LA TABLE TOURNOIS_LIST")
+            print(TOURNOIS_LIST)
+            LIST_ROUNDS = []
+
+
+
+
+

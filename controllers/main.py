@@ -197,17 +197,19 @@ class PlayerController:
             response = int(response)
             print("")
 
-            def update_ranking(response):
-                updating = input(f"Chosissez le nouveau n° de classement du joueur  {PLAYER_SUBSCRIBED[response - 1][0]} :  ")
+        def update_ranking(response):
+            updating = input(f"Chosissez le nouveau n° de classement du joueur  {PLAYER_SUBSCRIBED[response - 1][0]} :  ")
 
-                PLAYER_SUBSCRIBED[response - 1][-1] = int(updating)
-                print("")
-                print("")
+            PLAYER_SUBSCRIBED[response - 1][-1] = int(updating)
+            print("")
+            print("")
 
-                return print(PLAYER_SUBSCRIBED[response - 1][0],
-                             f" est maintenant classé(e) à la place n°{PLAYER_SUBSCRIBED[response - 1][-1]}")
+            return print(PLAYER_SUBSCRIBED[response - 1][0],
+                         f" est maintenant classé(e) à la place n°{PLAYER_SUBSCRIBED[response - 1][-1]}")
 
             print(update_ranking(response))
+
+
 
         PlayerController().menu_players()
 
@@ -254,7 +256,7 @@ class TournoisController:
             TournoisController().list_of_tournament()
 
         elif (response == 6):
-            MainController().main()
+            TournoisController().close_tournament()
 
         elif (response == 7):
             MainController().main()
@@ -288,6 +290,7 @@ class TournoisController:
     # Créer un match
     def create_round(self):
         Rounds().new_round()
+        Tournois().update_nombre_tours()
 
 
     # Mise à jour des résultats
@@ -337,6 +340,9 @@ class TournoisController:
                 print("Pas bon du tout !!!!!")
 
         Rounds().end_round()
+
+
+
 
 
 
@@ -400,6 +406,10 @@ class TournoisController:
                 index_item += 1
                 print(index_item, " -- ", item[0])
 
+
+    def close_tournament(self):
+        TOURNOIS_LIST[-1][-1] = LIST_ROUNDS
+        Tournois().close_tournament()
 
 
         self.menu_tournois()
