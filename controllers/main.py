@@ -451,7 +451,8 @@ class RapportController:
         elif response == 4:
             # Joueurs par classement d'un Tournoi
             RapportController().report_order_by_ranking_tournament()
-
+        elif response == 5:
+            RapportController().list_of_tournament()
 
     def order_actor_by_alphabet(self):
 
@@ -593,5 +594,7 @@ class RapportController:
                 print(index_item, " -- ", item[0])
 
 
+
         self.menu_tournois()
+
 
