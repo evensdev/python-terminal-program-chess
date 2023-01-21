@@ -411,3 +411,47 @@ class TournoisController:
     def close_tournament(self):
         TOURNOIS_LIST[-1][-1] = LIST_ROUNDS
         Tournois().close_tournament()
+
+
+
+class RapportController:
+    def __init__(self):
+        self.display = Display()
+
+    def menu_rapports(self):
+        self.display.affiche("                                       ")
+        self.display.affiche("-------------------------------------------------- ")
+        self.display.affiche("Rapports ")
+        self.display.affiche("-------------------------------------------------- ")
+        self.display.affiche("                                       ")
+
+        menu = ["Acteurs par ordre alphabétique",
+                "Acteurs par classement ",
+                "Joueurs par ordre alphabétique dans un Tournois",
+                "Joueurs par classement dans un Tournois",
+                "Liste de tous les Tournois",
+                "Liste de tous les Tours d'un tournoi",
+                "Liste de tous les Matchs d'un tournoi", "Retour"]
+
+        self.display.affiche_menu(menu)
+        self.display.affiche("                                       ")
+        response = self.display.get_input('Choisissez parmis les propositions (de 1 à 8) : ', "number")
+
+        if response == 1:
+            # Acteurs par ordre alphabétique
+            RapportController().order_actor_by_alphabet()
+
+    def order_actor_by_alphabet(self):
+
+        print("")
+        print("")
+        print("==========================================================")
+        print("Voici la liste de Acteurs classés par ordre Alphabétique: ")
+        print("==========================================================")
+
+        number = 0
+
+        for item in sorted(PLAYER_SUBSCRIBED):
+            number += 1
+            print(f" {number} -- {item[0]}")
+
