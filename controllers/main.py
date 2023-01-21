@@ -443,12 +443,15 @@ class RapportController:
 
         elif response == 2:
             # Acteurs par classement
-            RapportController().report_order_by_classement()
+            RapportController().report_order_by_ranking()
 
         elif response == 3:
             # Joueurs par ordre alphabétique d'un Tournoi
             RapportController().report_order_by_alpabet_tournament()
 
+        elif response == 4:
+            # Joueurs par classement d'un Tournoi
+            RapportController().report_order_by_ranking_tournament()
 
 
     def order_actor_by_alphabet(self):
@@ -465,7 +468,7 @@ class RapportController:
             number += 1
             print(f" {number} -- {item[0]}")
 
-    def report_order_by_classement(self):
+    def report_order_by_ranking(self):
 
         # Acteurs par classement
 
@@ -523,3 +526,68 @@ class RapportController:
 
         elif response == str(2):
             ordering_player_tournament(int(response) - 1)
+
+    def report_order_by_ranking_tournament(self):
+
+        # Joueurs par classement d'un Tournois
+
+        print("")
+        print("")
+        print("==========================================================")
+        print(
+            f"Sélectionnez le Tournois de votre choix ci-dessous  ")
+        print("==========================================================")
+        print("")
+
+        index_item = 0
+
+        for item in TOURNOIS_LIST:
+            index_item += 1
+            print(index_item, " -- ", item[0])
+
+        def ordering_player_tournament_by_ranking(tournament):
+
+            list_sorted = sorted(TOURNOIS_LIST[tournament][2], key=lambda TOURNOIS: TOURNOIS[-1])
+            index_item = 0
+
+            print("==========================================================")
+            print(
+                f"Voici la liste de joueurs du tournoi *** {TOURNOIS_LIST[tournament][0]} *** par ordre de CLASSEMENT : ")
+            print("==========================================================")
+            print("")
+
+            for item in list_sorted:
+                index_item += 1
+                print(f" {index_item} -- {item[0]} || classement n°{item[-1]}")
+
+        print("")
+        response = input("Choisissez votre tournoi en sélectionnant le bon numéro : ")
+        print("")
+
+        if response == str(1):
+            ordering_player_tournament_by_ranking(int(response) - 1)
+
+
+        elif response == str(2):
+            ordering_player_tournament_by_ranking(int(response) - 1)
+
+    def list_of_tournament(self):
+
+        # Liste de tous les Tournois
+
+        if len(TOURNOIS_LIST) == 0:
+            print("")
+            print("Il n'y a pas de tournois dans la liste. Veuillez créer un tournoi.")
+
+        else:
+
+            print("=============================")
+            print("Voici la liste des Tournois")
+            print("=============================")
+            print("")
+
+            index_item = 0
+
+            for item in TOURNOIS_LIST:
+                index_item += 1
+                print(index_item, " -- ", item[0])
