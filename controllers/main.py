@@ -1,5 +1,5 @@
 from views.display import Display
-from models.all import Player, PLAYER_SUBSCRIBED, TOURNOIS_LIST, LIST_ROUNDS, Tournois, Rounds
+from models.all import Player, PLAYER_SUBSCRIBED, TOURNOIS_LIST, LIST_OF_DUEL, LIST_ROUNDS, Tournois
 
 
 
@@ -282,7 +282,6 @@ class TournoisController:
         else:
             Tournois().make_tournament()
             Rounds().initialize_round()
-            #Rounds().save()
             print("Sauvegarde de la liste round", LIST_ROUNDS)
 
         self.menu_tournois()
@@ -525,6 +524,7 @@ class RapportController:
 
 
         elif response == str(2):
+
             ordering_player_tournament(int(response) - 1)
 
     def report_order_by_ranking_tournament(self):
@@ -591,3 +591,7 @@ class RapportController:
             for item in TOURNOIS_LIST:
                 index_item += 1
                 print(index_item, " -- ", item[0])
+
+
+        self.menu_tournois()
+
