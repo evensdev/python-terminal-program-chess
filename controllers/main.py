@@ -454,6 +454,9 @@ class RapportController:
         elif response == 5:
             RapportController().list_of_tournament()
 
+        elif response == 6:
+            RapportController().rapport_list_round_tournament()
+
     def order_actor_by_alphabet(self):
 
         print("")
@@ -594,7 +597,46 @@ class RapportController:
                 print(index_item, " -- ", item[0])
 
 
+    def rapport_list_round_tournament(self):
+
+        # Liste de tous les Tours d'un Tournoi
+
+        print("")
+        print("")
+        print("==========================================================")
+        print(
+            f"Sélectionnez le Tournois de votre choix ci-dessous  ")
+        print("==========================================================")
+        print("")
+
+        index_item = 0
+
+        for item in TOURNOIS_LIST:
+            index_item += 1
+            print(index_item, item[0])
+
+        response = input("Choisissez votre tournoi en sélectionnant le numéro : ")
+        print("")
+
+
+
+        if int(response) > len(TOURNOIS_LIST):
+            print("Ce n'est pas un bon numéro, choisissez votre tournoi en essayant une dernière fois")
+            response = input("Choisissez votre tournoi en sélectionnant le numéro : ")
+
+        else:
+            response = int(response)-1
+            for item in TOURNOIS_LIST[response][-1]:
+                print("-", item[0], "fin du round horodaté ici => ", item[2])
+
+
+
+
+
+
+
 
         self.menu_tournois()
+
 
 
