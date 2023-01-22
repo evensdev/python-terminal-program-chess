@@ -119,7 +119,7 @@ TOURNOIS_LIST = [['Al Nasser', 'Paris',
                      [['Nina', 1], ['Clara', 1]]]],
                    ['Round n°4', None, datetime.datetime(2023, 1, 21, 19, 12, 6, 201584),
                     [[['Evens', 4], ['Chelsea', 2]], [['Kylian', 2], ['Elohim', 3]], [['Seven', 2], ['Clara', 1]],
-                     [['Elodie', 0], ['Nina', 1]]]]]]
+                     [['Elodie', 0], ['Chantal', 1]]]]]]
                  ]
 
 
