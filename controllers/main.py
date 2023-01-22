@@ -458,6 +458,14 @@ class RapportController:
         elif response == 6:
             RapportController().rapport_list_round_tournament()
 
+        elif response == 7:
+            # Liste de tous les Matchs d'un tournoi
+            RapportController().rapport_list_match_tournament()
+
+        elif response == 8:
+            # Retour
+            MainController().main()
+
     def order_actor_by_alphabet(self):
 
         print("")
@@ -627,6 +635,83 @@ class RapportController:
             response = int(response)-1
             for item in TOURNOIS_LIST[response][-1]:
                 print("-", item[0], "fin du round horodaté ici => ", item[2])
+
+    def rapport_list_match_tournament(self):
+
+        # Liste de tous les matchs d'un Tournoi
+
+        print("")
+        print("")
+        print("==========================================================")
+        print(
+            f"Sélectionnez le Tournois de votre choix ci-dessous  ")
+        print("==========================================================")
+        print("")
+
+        index_item = 0
+
+        for item in TOURNOIS_LIST:
+            index_item += 1
+            print(index_item, item[0])
+
+        response = input("Choisissez votre tournoi en sélectionnant le numéro : ")
+        print("")
+
+        if int(response) > len(TOURNOIS_LIST):
+            print("Ce n'est pas un bon numéro, choisissez votre tournoi en essayant une dernière fois")
+            response = input("Choisissez votre tournoi en sélectionnant le numéro : ")
+
+        else:
+            response = int(response) - 1
+
+            print(f"Voici la liste des matchs du Tournoi *** {TOURNOIS_LIST[response][0]} ***")
+            print("===================================================")
+            print("")
+            print("      | |  ")
+            print("      | |  ")
+            print("      \ /  ")
+            print("       v  ")
+
+            print("")
+            print("Voici les matchs du ", TOURNOIS_LIST[response][-1][0][0])
+            print("")
+            print("")
+
+            first_round = TOURNOIS_LIST[response][-1][0][-1]
+
+            for item in first_round:
+                print(item[0][0], " VS ", item[1][0])
+
+            print("")
+            print("Voici les matchs du ", TOURNOIS_LIST[response][-1][1][0])
+            print("")
+            print("")
+
+            second_round = TOURNOIS_LIST[response][-1][1][-1]
+
+            for item in second_round:
+                print(item[0][0], " VS ", item[1][0])
+
+            print("")
+            print("Voici les matchs du ", TOURNOIS_LIST[response][-1][2][0])
+            print("")
+            print("")
+
+            third_round = TOURNOIS_LIST[response][-1][2][-1]
+
+            for item in third_round:
+                print(item[0][0], " VS ", item[1][0])
+
+            print("")
+            print("Voici les matchs du ", TOURNOIS_LIST[response][-1][3][0])
+            print("")
+            print("")
+
+            fourth_round = TOURNOIS_LIST[response][-1][3][-1]
+
+            for item in fourth_round:
+                print(item[0][0], " VS ", item[1][0])
+
 
 
 
