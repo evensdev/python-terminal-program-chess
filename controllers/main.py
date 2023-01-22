@@ -713,7 +713,43 @@ class RapportController:
                 print(item[0][0], " VS ", item[1][0])
 
 
+class SaveController:
 
+    def __init__(self):
+        self.display = Display()
+
+    def menu_save(self):
+        self.display.affiche("                                       ")
+        self.display.affiche("-------------------------------------------------- ")
+        self.display.affiche("Sauvegarde et Chargement ")
+        self.display.affiche("-------------------------------------------------- ")
+        self.display.affiche("                                       ")
+
+        menu = ["Sauvegarder la session actuelle",
+                "Charger la dernière session sauvegardée",
+                "Retour au menu principal"]
+
+        self.display.affiche_menu(menu)
+        self.display.affiche("                                       ")
+        response = self.display.get_input('Choisissez parmis les propositions (de 1 à 3) : ', "number")
+
+        if response == 1:
+            # Save in Json file
+            SaveController().save_game()
+
+        elif response == 2:
+            # Load from JSON file
+            SaveController.import_game()
+        elif response == 3:
+            # Return at main menu
+            MainController().main()
+
+    def save_game(self):
+        Tournois().export_data()
+
+
+    def import_game(self):
+        pass
 
 
 

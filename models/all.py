@@ -398,7 +398,6 @@ class Tournois():
     def update_nombre_tours(self):
         self.nombre_tours += 1
 
-
     def close_tournament(self):
 
         print(TOURNOIS_LIST[-1][-2])
@@ -423,6 +422,27 @@ class Tournois():
             LIST_ROUNDS = []
 
 
+    def export_data(self):
 
+        key_tournament = "list_of_tournament"
+        key_players = "list_of_players_subscribed"
+        key_rounds = "list_of_rounds"
 
+        def convert_string_to_dict(string, key):
+            return {key: string}
+
+        tournament_converted = convert_string_to_dict(str(TOURNOIS_LIST), key_tournament)
+        rounds_converted = convert_string_to_dict(str(LIST_ROUNDS), key_rounds)
+        players_converted = convert_string_to_dict(str(PLAYER_SUBSCRIBED), key_players)
+
+        db.insert(tournament_converted)
+        db.insert(rounds_converted)
+        db.insert(players_converted)
+
+        print("")
+        print("=================================================================")
+        print("Votre configuration a bien été sauvegardée en base de données !")
+        print("Vous pouvez à tout moment recharger votre dernière sauvegarde")
+        print("=================================================================")
+        print("")
 
