@@ -3,7 +3,13 @@ import datetime
 
 # Base de données
 db = TinyDB('db.json')
+chess = db.table('chess')
 
+PLAYER_SUBSCRIBED = []
+LIST_ROUNDS = []
+TOURNOIS_LIST = []
+
+"""
 
 # LISTE DE JOUEURS INSCRITS
 
@@ -25,7 +31,18 @@ PLAYER_SUBSCRIBED = [['Evens', 'JOSEPH', '13/06/1991', 'm', '1'],
                      ['Oscar', 'JOSEPH', '04/06/2027', 'm', '8']
                      ]
 
-LIST_ROUNDS = []
+LIST_ROUNDS = [['Round numero 1', '2023-01-21 19:11:26.350058', 'datetime.datetime(2023, 1, 21, 19, 11, 36, 147457)',
+                    [[['Evens', 4], ['Clara', 1]], [['Elodie', 0], ['Chelsea', 2]],
+                     [['Nina', 1], ['Seven', 2]], [['Kylian', 2], ['Elohim', 3]]]],
+                   ['Round numero 2', '2023-01-21 19:11:43.397692', 'datetime.datetime(2023, 1, 21, 19, 11, 47, 349600)',
+                    [(['Evens', 4], ['Elodie', 0]), (['Seven', 2], ['Chelsea', 2]),
+                     (['Kylian', 2], ['Nina', 1]), (['Clara', 1], ['Elohim', 3])]],
+                   ['Round numero 3', None, 'datetime.datetime(2023, 1, 21, 19, 11, 55, 29699)',
+                    [[['Evens', 4], ['Kylian', 2]], [['Seven', 2], ['Chelsea', 2]], [['Elohim', 3], ['Elodie', 0]],
+                     [['Nina', 1], ['Clara', 1]]]],
+                   ['Round numero 4', None, 'datetime.datetime(2023, 1, 21, 19, 12, 6, 201584)',
+                    [[['Evens', 4], ['Chelsea', 2]], [['Kylian', 2], ['Elohim', 3]], [['Seven', 2], ['Clara', 1]],
+                     [['Elodie', 0], ['Chantal', 1]]]]]
 
 
 # this List is full because testing, but the true version will be empty
@@ -38,17 +55,17 @@ TOURNOIS_LIST = [['Al Nasser', 'Paris',
                    ['Chelsea', 'JOSEPH', '12/05/2025', 'f', '6'],
                    ['Seven', 'JOSEPH', '12/05/2025', 'f', '7'],
                    ['Elohim', 'JOSEPH', '04/06/2027', 'm', '8']],
-                  'bullet', 'RA', datetime.datetime(2023, 1, 21, 19, 11, 11, 627838), 4,
-                  [['Round n°1', '2023-01-21 19:11:26.350058', datetime.datetime(2023, 1, 21, 19, 11, 36, 147457),
+                  'bullet', 'RA', 'datetime.datetime(2023, 1, 21, 19, 11, 11, 627838)', 4,
+                  [['Round numero 1', '2023-01-21 19:11:26.350058', 'datetime.datetime(2023, 1, 21, 19, 11, 36, 147457)',
                     [[['Evens', 4], ['Clara', 1]], [['Elodie', 0], ['Chelsea', 2]],
                      [['Nina', 1], ['Seven', 2]], [['Kylian', 2], ['Elohim', 3]]]],
-                   ['Round n°2', '2023-01-21 19:11:43.397692', datetime.datetime(2023, 1, 21, 19, 11, 47, 349600),
+                   ['Round numero 2', '2023-01-21 19:11:43.397692', 'datetime.datetime(2023, 1, 21, 19, 11, 47, 349600)',
                     [(['Evens', 4], ['Elodie', 0]), (['Seven', 2], ['Chelsea', 2]),
                      (['Kylian', 2], ['Nina', 1]), (['Clara', 1], ['Elohim', 3])]],
-                   ['Round n°3', None, datetime.datetime(2023, 1, 21, 19, 11, 55, 29699),
+                   ['Round numero 3', None, 'datetime.datetime(2023, 1, 21, 19, 11, 55, 29699)',
                     [[['Evens', 4], ['Kylian', 2]], [['Seven', 2], ['Chelsea', 2]], [['Elohim', 3], ['Elodie', 0]],
                      [['Nina', 1], ['Clara', 1]]]],
-                   ['Round n°4', None, datetime.datetime(2023, 1, 21, 19, 12, 6, 201584),
+                   ['Round numero 4', None, 'datetime.datetime(2023, 1, 21, 19, 12, 6, 201584)',
                     [[['Evens', 4], ['Chelsea', 2]], [['Kylian', 2], ['Elohim', 3]], [['Seven', 2], ['Clara', 1]], [['Elodie', 0], ['Nina', 1]]]]]],
                  ['American Express', 'Paris',
                   [['Evens', 'JOSEPH', '13/06/1991', 'm', '1'],
@@ -59,20 +76,24 @@ TOURNOIS_LIST = [['Al Nasser', 'Paris',
                    ['Chelsea', 'JOSEPH', '12/05/2025', 'f', '6'],
                    ['Seven', 'JOSEPH', '12/05/2025', 'f', '7'],
                    ['Elohim', 'JOSEPH', '04/06/2027', 'm', '8']],
-                  'bullet', 'RA', datetime.datetime(2023, 1, 21, 19, 11, 11, 627838), 4,
-                  [['Round n°1', '2023-01-21 19:11:26.350058', datetime.datetime(2023, 1, 21, 19, 11, 36, 147457),
+                  'bullet', 'RA', 'datetime.datetime(2023, 1, 21, 19, 11, 11, 627838)', 4,
+                  [['Round numero 1', '2023-01-21 19:11:26.350058', 'datetime.datetime(2023, 1, 21, 19, 11, 36, 147457)',
                     [[['Evens', 4], ['Clara', 1]], [['Elodie', 0], ['Chelsea', 2]],
                      [['Nina', 1], ['Seven', 2]], [['Kylian', 2], ['Elohim', 3]]]],
-                   ['Round n°2', '2023-01-21 19:11:43.397692', datetime.datetime(2023, 1, 21, 19, 11, 47, 349600),
+                   ['Round n°2', '2023-01-21 19:11:43.397692', 'datetime.datetime(2023, 1, 21, 19, 11, 47, 349600)',
                     [(['Evens', 4], ['Elodie', 0]), (['Seven', 2], ['Chelsea', 2]),
                      (['Kylian', 2], ['Nina', 1]), (['Clara', 1], ['Elohim', 3])]],
-                   ['Round n°3', None, datetime.datetime(2023, 1, 21, 19, 11, 55, 29699),
+                   ['Round numero 3', None, 'datetime.datetime(2023, 1, 21, 19, 11, 55, 29699)',
                     [[['Evens', 4], ['Kylian', 2]], [['Seven', 2], ['Chelsea', 2]], [['Elohim', 3], ['Elodie', 0]],
                      [['Nina', 1], ['Clara', 1]]]],
-                   ['Round n°4', None, datetime.datetime(2023, 1, 21, 19, 12, 6, 201584),
+                   ['Round numero 4', None, 'datetime.datetime(2023, 1, 21, 19, 12, 6, 201584)',
                     [[['Evens', 4], ['Chelsea', 2]], [['Kylian', 2], ['Elohim', 3]], [['Seven', 2], ['Clara', 1]],
                      [['Elodie', 0], ['Chantal', 1]]]]]]
                  ]
+
+
+
+"""
 
 
 
@@ -424,20 +445,47 @@ class Tournois():
 
     def export_data(self):
 
-        key_tournament = "list_of_tournament"
-        key_players = "list_of_players_subscribed"
-        key_rounds = "list_of_rounds"
+        # Convert tournois de Liste vers Dictionnaire
 
-        def convert_string_to_dict(string, key):
-            return {key: string}
+        tournois_dict_list = []
+        for tournament in TOURNOIS_LIST:
+            tournoi = {
+                "nom_competition": tournament[0],
+                "ville": tournament[1],
+                "liste_joueurs": tournament[2],
+                "coup": tournament[3],
+                "description": tournament[4],
+                "date_debut": tournament[5],
+                "nb_tour": tournament[6],
+                "liste_rounds": tournament[7]
+            }
+            tournois_dict_list.append(tournoi)
 
-        tournament_converted = convert_string_to_dict(str(TOURNOIS_LIST), key_tournament)
-        rounds_converted = convert_string_to_dict(str(LIST_ROUNDS), key_rounds)
-        players_converted = convert_string_to_dict(str(PLAYER_SUBSCRIBED), key_players)
+        ##############################################################
+        # Convert Rounds  Liste vers Dictionnaire
+        def list_to_dict(lst):
+            my_dict = {}
+            for i, item in enumerate(lst):
+                my_dict[i] = item
+            return my_dict
 
-        db.insert(tournament_converted)
-        db.insert(rounds_converted)
-        db.insert(players_converted)
+        list_to_dict(LIST_ROUNDS)
+
+        ##############################################################
+        # Convert Player  Liste vers Dictionnaire
+        player_subscribed_dict = {i: player for i, player in enumerate(PLAYER_SUBSCRIBED)}
+
+        tournament_converted = tournois_dict_list[0]
+        rounds_converted = list_to_dict(LIST_ROUNDS)
+        players_converted = player_subscribed_dict = {i: player for i, player in enumerate(PLAYER_SUBSCRIBED)}
+
+        chess.insert(tournament_converted)
+        chess.insert(rounds_converted)
+        chess.insert(players_converted)
+
+        ################################################
+
+
 
         print("")
         print("=================================================================")
@@ -446,3 +494,60 @@ class Tournois():
         print("=================================================================")
         print("")
 
+    def import_data(self):
+        tournament_imported = chess.get(doc_id=1)
+        rounds_imported = chess.get(doc_id=2)
+        players_imported = chess.get(doc_id=3)
+
+        # Test importation
+        print(tournament_imported)
+        print("")
+
+        # Test importation
+        print(rounds_imported)
+        print("")
+
+        # Test importation
+        print(players_imported)
+        print("")
+
+        ##########################################################
+        #
+        # Convert Round  Dictionnaire vers Liste
+        def dict_to_list(d):
+            return list(d.values())
+
+        # Convert Player  Dictionnaire  vers Liste
+        player_dict_to_list = list(players_imported.values())
+
+        # Convert Tournois de Dictionnaire JSON vers Liste
+        tournois_dict_to_list = list(tournament_imported.values())
+
+        print(tournois_dict_to_list)
+
+        #######################################################
+
+        for item in player_dict_to_list:
+            PLAYER_SUBSCRIBED.append(item)
+
+        for item in tournois_dict_to_list:
+            TOURNOIS_LIST.append(item)
+
+        for item in dict_to_list(rounds_imported):
+            LIST_ROUNDS.append(item)
+
+        ####################
+
+        print("")
+        print(PLAYER_SUBSCRIBED)
+        print("")
+        print(TOURNOIS_LIST)
+        print("")
+        print(LIST_ROUNDS)
+
+        print("")
+        print("=================================================================")
+        print("Votre Sauvegarde a bien été Chargé sur ce jeu !")
+        print("Vous pouvez retrouver tous les éléments sauvegardés de votre ancienne partie")
+        print("=================================================================")
+        print("")
