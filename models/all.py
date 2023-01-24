@@ -6,6 +6,11 @@ import ast
 db = TinyDB('db.json')
 chess = db.table('chess')
 
+PLAYER_SUBSCRIBED = []
+LIST_ROUNDS = []
+TOURNOIS_LIST = []
+
+"""
 
 # LISTE DE JOUEURS INSCRITS
 PLAYER_SUBSCRIBED = [['Evens', 'JOSEPH', '13/06/1991', 'm', '1'],
@@ -26,6 +31,20 @@ PLAYER_SUBSCRIBED = [['Evens', 'JOSEPH', '13/06/1991', 'm', '1'],
                      ['Oscar', 'JOSEPH', '04/06/2027', 'm', '8']
                      ]
 
+
+LIST_ROUNDS = [['Round numero 1', '2023-01-21 19:11:26.350058', 'datetime.datetime(2023, 1, 21, 19, 11, 36, 147457)',
+                    [[['Evens', 4], ['Clara', 1]], [['Elodie', 0], ['Chelsea', 2]],
+                     [['Nina', 1], ['Seven', 2]], [['Kylian', 2], ['Elohim', 3]]]],
+                   ['Round numero 2', '2023-01-21 19:11:43.397692', 'datetime.datetime(2023, 1, 21, 19, 11, 47, 349600)',
+                    [(['Evens', 4], ['Elodie', 0]), (['Seven', 2], ['Chelsea', 2]),
+                     (['Kylian', 2], ['Nina', 1]), (['Clara', 1], ['Elohim', 3])]],
+                   ['Round numero 3', None, 'datetime.datetime(2023, 1, 21, 19, 11, 55, 29699)',
+                    [[['Evens', 4], ['Kylian', 2]], [['Seven', 2], ['Chelsea', 2]], [['Elohim', 3], ['Elodie', 0]],
+                     [['Nina', 1], ['Clara', 1]]]],
+                   ['Round numero 4', None, 'datetime.datetime(2023, 1, 21, 19, 12, 6, 201584)',
+                    [[['Evens', 4], ['Chelsea', 2]], [['Kylian', 2], ['Elohim', 3]], [['Seven', 2], ['Clara', 1]],
+                     [['Elodie', 0], ['Chantal', 1]]]]]
+=======
 LIST_OF_DUEL = [[
 
     [['Evens', 0], ['Clara', 0]],
@@ -78,6 +97,7 @@ LIST_ROUNDS = [
 
 
 
+
 # this List is full because testing, but the true version will be empty
 TOURNOIS_LIST = [['Al Nasser', 'Paris',
                   [['Evens', 'JOSEPH', '13/06/1991', 'm', '1'],
@@ -89,6 +109,18 @@ TOURNOIS_LIST = [['Al Nasser', 'Paris',
                    ['Seven', 'JOSEPH', '12/05/2025', 'f', '7'],
                    ['Elohim', 'JOSEPH', '04/06/2027', 'm', '8']],
                   'bullet', 'RA', 'datetime.datetime(2023, 1, 21, 19, 11, 11, 627838)', 4,
+
+                  [['Round numero 1', '2023-01-21 19:11:26.350058', 'datetime.datetime(2023, 1, 21, 19, 11, 36, 147457)',
+                    [[['Evens', 4], ['Clara', 1]], [['Elodie', 0], ['Chelsea', 2]],
+                     [['Nina', 1], ['Seven', 2]], [['Kylian', 2], ['Elohim', 3]]]],
+                   ['Round numero 2', '2023-01-21 19:11:43.397692', 'datetime.datetime(2023, 1, 21, 19, 11, 47, 349600)',
+                    [(['Evens', 4], ['Elodie', 0]), (['Seven', 2], ['Chelsea', 2]),
+                     (['Kylian', 2], ['Nina', 1]), (['Clara', 1], ['Elohim', 3])]],
+                   ['Round numero 3', None, 'datetime.datetime(2023, 1, 21, 19, 11, 55, 29699)',
+                    [[['Evens', 4], ['Kylian', 2]], [['Seven', 2], ['Chelsea', 2]], [['Elohim', 3], ['Elodie', 0]],
+                     [['Nina', 1], ['Clara', 1]]]],
+                   ['Round numero 4', None, 'datetime.datetime(2023, 1, 21, 19, 12, 6, 201584)',
+
                   [['Round n°1', '2023-01-21 19:11:26.350058', 'datetime.datetime(2023, 1, 21, 19, 11, 36, 147457)',
                     [[['Evens', 4], ['Clara', 1]], [['Elodie', 0], ['Chelsea', 2]],
                      [['Nina', 1], ['Seven', 2]], [['Kylian', 2], ['Elohim', 3]]]],
@@ -99,6 +131,7 @@ TOURNOIS_LIST = [['Al Nasser', 'Paris',
                     [[['Evens', 4], ['Kylian', 2]], [['Seven', 2], ['Chelsea', 2]], [['Elohim', 3], ['Elodie', 0]],
                      [['Nina', 1], ['Clara', 1]]]],
                    ['Round n°4', None, 'datetime.datetime(2023, 1, 21, 19, 12, 6, 201584)',
+
                     [[['Evens', 4], ['Chelsea', 2]], [['Kylian', 2], ['Elohim', 3]], [['Seven', 2], ['Clara', 1]], [['Elodie', 0], ['Nina', 1]]]]]],
                  ['American Express', 'Paris',
                   [['Evens', 'JOSEPH', '13/06/1991', 'm', '1'],
@@ -110,19 +143,34 @@ TOURNOIS_LIST = [['Al Nasser', 'Paris',
                    ['Seven', 'JOSEPH', '12/05/2025', 'f', '7'],
                    ['Elohim', 'JOSEPH', '04/06/2027', 'm', '8']],
                   'bullet', 'RA', 'datetime.datetime(2023, 1, 21, 19, 11, 11, 627838)', 4,
+
+                  [['Round numero 1', '2023-01-21 19:11:26.350058', 'datetime.datetime(2023, 1, 21, 19, 11, 36, 147457)',
+
                   [['Round n°1', '2023-01-21 19:11:26.350058', 'datetime.datetime(2023, 1, 21, 19, 11, 36, 147457)',
+
                     [[['Evens', 4], ['Clara', 1]], [['Elodie', 0], ['Chelsea', 2]],
                      [['Nina', 1], ['Seven', 2]], [['Kylian', 2], ['Elohim', 3]]]],
                    ['Round n°2', '2023-01-21 19:11:43.397692', 'datetime.datetime(2023, 1, 21, 19, 11, 47, 349600)',
                     [(['Evens', 4], ['Elodie', 0]), (['Seven', 2], ['Chelsea', 2]),
                      (['Kylian', 2], ['Nina', 1]), (['Clara', 1], ['Elohim', 3])]],
+
+                   ['Round numero 3', None, 'datetime.datetime(2023, 1, 21, 19, 11, 55, 29699)',
+                    [[['Evens', 4], ['Kylian', 2]], [['Seven', 2], ['Chelsea', 2]], [['Elohim', 3], ['Elodie', 0]],
+                     [['Nina', 1], ['Clara', 1]]]],
+                   ['Round numero 4', None, 'datetime.datetime(2023, 1, 21, 19, 12, 6, 201584)',
+
                    ['Round n°3', None, 'datetime.datetime(2023, 1, 21, 19, 11, 55, 29699)',
                     [[['Evens', 4], ['Kylian', 2]], [['Seven', 2], ['Chelsea', 2]], [['Elohim', 3], ['Elodie', 0]],
                      [['Nina', 1], ['Clara', 1]]]],
                    ['Round n°4', None, 'datetime.datetime(2023, 1, 21, 19, 12, 6, 201584)',
+
                     [[['Evens', 4], ['Chelsea', 2]], [['Kylian', 2], ['Elohim', 3]], [['Seven', 2], ['Clara', 1]],
                      [['Elodie', 0], ['Chantal', 1]]]]]]
                  ]
+
+
+
+"""
 
 
 
@@ -193,7 +241,6 @@ class Rounds:
             second_list = list_player[half:]
 
             zip(first_list, second_list)
-
             print(zip(first_list, second_list))
 
             # créer des paires de match avec la fonction zip
@@ -463,7 +510,9 @@ class Tournois():
 
     def export_data(self):
 
+
         ################################################
+
         # Convert tournois de Liste vers Dictionnaire
 
         tournois_dict_list = []
@@ -504,6 +553,7 @@ class Tournois():
 
         ################################################
 
+
         print("")
         print("=================================================================")
         print("Votre configuration a bien été sauvegardée en base de données !")
@@ -513,13 +563,20 @@ class Tournois():
 
     def import_data(self):
 
+
+
         # Importation des listes
+
         tournament_imported = chess.get(doc_id=1)
         rounds_imported = chess.get(doc_id=2)
         players_imported = chess.get(doc_id=3)
 
         # Test importation
+
+        print(tournament_imported)
+
         print(type(tournament_imported))
+
         print("")
 
         # Test importation
@@ -527,9 +584,55 @@ class Tournois():
         print("")
 
         # Test importation
+
+        print(players_imported)
+        print("")
+
+        ##########################################################
+        #
+        # Convert Round  Dictionnaire vers Liste
+        def dict_to_list(d):
+            return list(d.values())
+
+        # Convert Player  Dictionnaire  vers Liste
+        player_dict_to_list = list(players_imported.values())
+
+        # Convert Tournois de Dictionnaire JSON vers Liste
+        tournois_dict_to_list = list(tournament_imported.values())
+
+        print(tournois_dict_to_list)
+
+        #######################################################
+
+        for item in player_dict_to_list:
+            PLAYER_SUBSCRIBED.append(item)
+
+        for item in tournois_dict_to_list:
+            TOURNOIS_LIST.append(item)
+
+        for item in dict_to_list(rounds_imported):
+            LIST_ROUNDS.append(item)
+
+        ####################
+
+        print("")
+        print(PLAYER_SUBSCRIBED)
+        print("")
+        print(TOURNOIS_LIST)
+        print("")
+        print(LIST_ROUNDS)
+
+        print("")
+        print("=================================================================")
+        print("Votre Sauvegarde a bien été Chargé sur ce jeu !")
+        print("Vous pouvez retrouver tous les éléments sauvegardés de votre ancienne partie")
+        print("=================================================================")
+        print("")
+
         print(type(players_imported))
         print("")
 
         # fonction de conversion
+
 
 

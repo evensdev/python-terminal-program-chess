@@ -740,14 +740,13 @@ class SaveController:
 
         elif response == 2:
             # Load from JSON file
-            SaveController.import_game()
+            SaveController().import_game()
         elif response == 3:
             # Return at main menu
             MainController().main()
 
     def save_game(self):
         Tournois().export_data()
-
 
     def import_game(self):
         Tournois().import_data()
