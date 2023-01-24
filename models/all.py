@@ -1,5 +1,6 @@
 from tinydb import TinyDB, Query, where
 import datetime
+import ast
 
 # Base de données
 db = TinyDB('db.json')
@@ -12,7 +13,6 @@ TOURNOIS_LIST = []
 """
 
 # LISTE DE JOUEURS INSCRITS
-
 PLAYER_SUBSCRIBED = [['Evens', 'JOSEPH', '13/06/1991', 'm', '1'],
                   ['Elodie', 'JOSEPH', '28/11/1981', 'f', '2'],
                   ['Nina', 'JOSEPH', '02/03/2023', 'f', '3'],
@@ -31,6 +31,7 @@ PLAYER_SUBSCRIBED = [['Evens', 'JOSEPH', '13/06/1991', 'm', '1'],
                      ['Oscar', 'JOSEPH', '04/06/2027', 'm', '8']
                      ]
 
+
 LIST_ROUNDS = [['Round numero 1', '2023-01-21 19:11:26.350058', 'datetime.datetime(2023, 1, 21, 19, 11, 36, 147457)',
                     [[['Evens', 4], ['Clara', 1]], [['Elodie', 0], ['Chelsea', 2]],
                      [['Nina', 1], ['Seven', 2]], [['Kylian', 2], ['Elohim', 3]]]],
@@ -43,6 +44,58 @@ LIST_ROUNDS = [['Round numero 1', '2023-01-21 19:11:26.350058', 'datetime.dateti
                    ['Round numero 4', None, 'datetime.datetime(2023, 1, 21, 19, 12, 6, 201584)',
                     [[['Evens', 4], ['Chelsea', 2]], [['Kylian', 2], ['Elohim', 3]], [['Seven', 2], ['Clara', 1]],
                      [['Elodie', 0], ['Chantal', 1]]]]]
+=======
+LIST_OF_DUEL = [[
+
+    [['Evens', 0], ['Clara', 0]],
+       [['Elodie', 0], ['Chelsea', 0]],
+       [['Nina', 0], ['Kylian', 0]],
+       [['Kylian', 0], ['Elohim', 0]]
+    ],
+               [[['Evens', 0], ['Elodie', 0]],
+       [['Kylian', 0], ['Chelsea', 0]],
+       [['Nina', 0], ['Clara', 0]],
+       [['Clara', 0], ['Seven', 0]]
+    ],
+               [[['Evens', 0], ['Chelsea', 0]],
+       [['Elodie', 0], ['Seven', 0]],
+       [['Nina', 0], ['Seven', 0]],
+       [['Kylian', 0], ['Clara', 0]]
+    ],
+               [[['Evens', 0], ['Seven', 0]],
+       [['Elodie', 0], ['Elohim', 0]],
+       [['Nina', 0], ['Elohim', 0]],
+       [['Kylian', 0], ['Elohim', 0]]
+    ]]
+
+
+
+LIST_ROUNDS = [
+
+    ["Round n°1",
+    datetime.datetime(2022, 8, 10, 14, 25, 22, 195002),
+     datetime.datetime(2022, 8, 10, 17, 25, 22, 195002),
+     [LIST_OF_DUEL[0]]
+     ],
+    ["Round n°2",
+    datetime.datetime(2022, 8, 10, 14, 25, 22, 195002),
+     datetime.datetime(2022, 8, 10, 17, 25, 22, 195002),
+     [LIST_OF_DUEL[1]]
+     ],
+    ["Round n°3",
+    datetime.datetime(2022, 8, 10, 14, 25, 22, 195002),
+     datetime.datetime(2022, 8, 10, 17, 25, 22, 195002),
+     [LIST_OF_DUEL[2]]
+     ],
+    ["Round n°4",
+    datetime.datetime(2022, 8, 10, 14, 25, 22, 195002),
+     datetime.datetime(2022, 8, 10, 17, 25, 22, 195002),
+     [LIST_OF_DUEL[3]]
+     ],
+         ]
+
+
+
 
 
 # this List is full because testing, but the true version will be empty
@@ -56,6 +109,7 @@ TOURNOIS_LIST = [['Al Nasser', 'Paris',
                    ['Seven', 'JOSEPH', '12/05/2025', 'f', '7'],
                    ['Elohim', 'JOSEPH', '04/06/2027', 'm', '8']],
                   'bullet', 'RA', 'datetime.datetime(2023, 1, 21, 19, 11, 11, 627838)', 4,
+
                   [['Round numero 1', '2023-01-21 19:11:26.350058', 'datetime.datetime(2023, 1, 21, 19, 11, 36, 147457)',
                     [[['Evens', 4], ['Clara', 1]], [['Elodie', 0], ['Chelsea', 2]],
                      [['Nina', 1], ['Seven', 2]], [['Kylian', 2], ['Elohim', 3]]]],
@@ -66,6 +120,18 @@ TOURNOIS_LIST = [['Al Nasser', 'Paris',
                     [[['Evens', 4], ['Kylian', 2]], [['Seven', 2], ['Chelsea', 2]], [['Elohim', 3], ['Elodie', 0]],
                      [['Nina', 1], ['Clara', 1]]]],
                    ['Round numero 4', None, 'datetime.datetime(2023, 1, 21, 19, 12, 6, 201584)',
+
+                  [['Round n°1', '2023-01-21 19:11:26.350058', 'datetime.datetime(2023, 1, 21, 19, 11, 36, 147457)',
+                    [[['Evens', 4], ['Clara', 1]], [['Elodie', 0], ['Chelsea', 2]],
+                     [['Nina', 1], ['Seven', 2]], [['Kylian', 2], ['Elohim', 3]]]],
+                   ['Round n°2', '2023-01-21 19:11:43.397692', 'datetime.datetime(2023, 1, 21, 19, 11, 47, 349600)',
+                    [(['Evens', 4], ['Elodie', 0]), (['Seven', 2], ['Chelsea', 2]),
+                     (['Kylian', 2], ['Nina', 1]), (['Clara', 1], ['Elohim', 3])]],
+                   ['Round n°3', None, 'datetime.datetime(2023, 1, 21, 19, 11, 55, 29699)',
+                    [[['Evens', 4], ['Kylian', 2]], [['Seven', 2], ['Chelsea', 2]], [['Elohim', 3], ['Elodie', 0]],
+                     [['Nina', 1], ['Clara', 1]]]],
+                   ['Round n°4', None, 'datetime.datetime(2023, 1, 21, 19, 12, 6, 201584)',
+
                     [[['Evens', 4], ['Chelsea', 2]], [['Kylian', 2], ['Elohim', 3]], [['Seven', 2], ['Clara', 1]], [['Elodie', 0], ['Nina', 1]]]]]],
                  ['American Express', 'Paris',
                   [['Evens', 'JOSEPH', '13/06/1991', 'm', '1'],
@@ -77,16 +143,27 @@ TOURNOIS_LIST = [['Al Nasser', 'Paris',
                    ['Seven', 'JOSEPH', '12/05/2025', 'f', '7'],
                    ['Elohim', 'JOSEPH', '04/06/2027', 'm', '8']],
                   'bullet', 'RA', 'datetime.datetime(2023, 1, 21, 19, 11, 11, 627838)', 4,
+
                   [['Round numero 1', '2023-01-21 19:11:26.350058', 'datetime.datetime(2023, 1, 21, 19, 11, 36, 147457)',
+
+                  [['Round n°1', '2023-01-21 19:11:26.350058', 'datetime.datetime(2023, 1, 21, 19, 11, 36, 147457)',
+
                     [[['Evens', 4], ['Clara', 1]], [['Elodie', 0], ['Chelsea', 2]],
                      [['Nina', 1], ['Seven', 2]], [['Kylian', 2], ['Elohim', 3]]]],
                    ['Round n°2', '2023-01-21 19:11:43.397692', 'datetime.datetime(2023, 1, 21, 19, 11, 47, 349600)',
                     [(['Evens', 4], ['Elodie', 0]), (['Seven', 2], ['Chelsea', 2]),
                      (['Kylian', 2], ['Nina', 1]), (['Clara', 1], ['Elohim', 3])]],
+
                    ['Round numero 3', None, 'datetime.datetime(2023, 1, 21, 19, 11, 55, 29699)',
                     [[['Evens', 4], ['Kylian', 2]], [['Seven', 2], ['Chelsea', 2]], [['Elohim', 3], ['Elodie', 0]],
                      [['Nina', 1], ['Clara', 1]]]],
                    ['Round numero 4', None, 'datetime.datetime(2023, 1, 21, 19, 12, 6, 201584)',
+
+                   ['Round n°3', None, 'datetime.datetime(2023, 1, 21, 19, 11, 55, 29699)',
+                    [[['Evens', 4], ['Kylian', 2]], [['Seven', 2], ['Chelsea', 2]], [['Elohim', 3], ['Elodie', 0]],
+                     [['Nina', 1], ['Clara', 1]]]],
+                   ['Round n°4', None, 'datetime.datetime(2023, 1, 21, 19, 12, 6, 201584)',
+
                     [[['Evens', 4], ['Chelsea', 2]], [['Kylian', 2], ['Elohim', 3]], [['Seven', 2], ['Clara', 1]],
                      [['Elodie', 0], ['Chantal', 1]]]]]]
                  ]
@@ -125,8 +202,8 @@ class Rounds:
                  end = str(),
                  matches = []):
 
-        self.start = datetime.datetime.now()
-        self.end = datetime.datetime.now()
+        self.start = str(datetime.datetime.now())
+        self.end = str(datetime.datetime.now())
         self.matches = matches
 
     # initialiser le 1er round quand le tournoi est créé
@@ -164,7 +241,6 @@ class Rounds:
             second_list = list_player[half:]
 
             zip(first_list, second_list)
-
             print(zip(first_list, second_list))
 
             # créer des paires de match avec la fonction zip
@@ -265,14 +341,14 @@ class Rounds:
 
 
                     launch_round = []
-                    launch_round.append("Round n°" + str(len(LIST_ROUNDS) + 1))
+                    launch_round.append("Round numero " + str(len(LIST_ROUNDS) + 1))
                     launch_round.append(str(self.start))
                     launch_round.append(None)
                     launch_round.append(second_round)
                     LIST_ROUNDS.append(launch_round)
 
                     print("")
-                    print("Le round n°",len(LIST_ROUNDS), " est prêt")
+                    print("Le round numero ",len(LIST_ROUNDS), " est prêt")
                     print("Vous pouvez entrer les résultats des nouveaux matchs en sélectionnant la touche 3' ")
                     print("")
 
@@ -297,7 +373,7 @@ class Rounds:
                     duel_ready_to_control.append([ranking_round[6], ranking_round[7]])
 
                     launch_round = []
-                    launch_round.append("Round n°" + str(len(LIST_ROUNDS) + 1))
+                    launch_round.append("Round numero " + str(len(LIST_ROUNDS) + 1))
                     launch_round.append(None)
                     launch_round.append(None)
                     launch_round.append(duel_ready_to_control)
@@ -321,16 +397,7 @@ class Rounds:
         LIST_ROUNDS[-1][2] = datetime.datetime.now()
 
 
-    def save(self):
-
-        item_round = []
-        item_round.append(self.start)
-        item_round.append(self.end)
-        item_round.append(self.matches)
-        LIST_ROUNDS.append(item_round)
-        #return item_round
-        pass
-
+   
 
 class Tournois():
 
@@ -339,7 +406,7 @@ class Tournois():
                  joueurs=[],
                  temps=None,
                  description=None,
-                 date=datetime.datetime.now(),
+                 date=str(datetime.datetime.now()),
                  nombre_tours=1, tournees=[]):
 
         self.nom = nom
@@ -398,9 +465,7 @@ class Tournois():
         self.description = input('Renseignez les Remarques sur le Tournoi : ')
         self.joueurs = add_player_tournament()
 
-
     def save(self):
-
         item_tournois = []
         item_tournois.append(self.nom)
         item_tournois.append(self.lieu)
@@ -414,7 +479,7 @@ class Tournois():
         TOURNOIS_LIST.append(item_tournois)
 
         return item_tournois
-        pass
+
 
     def update_nombre_tours(self):
         self.nombre_tours += 1
@@ -444,6 +509,9 @@ class Tournois():
 
 
     def export_data(self):
+
+
+        ################################################
 
         # Convert tournois de Liste vers Dictionnaire
 
@@ -486,7 +554,6 @@ class Tournois():
         ################################################
 
 
-
         print("")
         print("=================================================================")
         print("Votre configuration a bien été sauvegardée en base de données !")
@@ -495,12 +562,21 @@ class Tournois():
         print("")
 
     def import_data(self):
+
+
+
+        # Importation des listes
+
         tournament_imported = chess.get(doc_id=1)
         rounds_imported = chess.get(doc_id=2)
         players_imported = chess.get(doc_id=3)
 
         # Test importation
+
         print(tournament_imported)
+
+        print(type(tournament_imported))
+
         print("")
 
         # Test importation
@@ -508,6 +584,7 @@ class Tournois():
         print("")
 
         # Test importation
+
         print(players_imported)
         print("")
 
@@ -551,3 +628,11 @@ class Tournois():
         print("Vous pouvez retrouver tous les éléments sauvegardés de votre ancienne partie")
         print("=================================================================")
         print("")
+
+        print(type(players_imported))
+        print("")
+
+        # fonction de conversion
+
+
+
