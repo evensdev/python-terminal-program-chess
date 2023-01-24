@@ -1,8 +1,10 @@
 from tinydb import TinyDB, Query, where
 import datetime
+import ast
 
 # Base de données
 db = TinyDB('db.json')
+chess = db.table('chess')
 
 
 # LISTE DE JOUEURS INSCRITS
@@ -86,17 +88,17 @@ TOURNOIS_LIST = [['Al Nasser', 'Paris',
                    ['Chelsea', 'JOSEPH', '12/05/2025', 'f', '6'],
                    ['Seven', 'JOSEPH', '12/05/2025', 'f', '7'],
                    ['Elohim', 'JOSEPH', '04/06/2027', 'm', '8']],
-                  'bullet', 'RA', datetime.datetime(2023, 1, 21, 19, 11, 11, 627838), 4,
-                  [['Round n°1', '2023-01-21 19:11:26.350058', datetime.datetime(2023, 1, 21, 19, 11, 36, 147457),
+                  'bullet', 'RA', 'datetime.datetime(2023, 1, 21, 19, 11, 11, 627838)', 4,
+                  [['Round n°1', '2023-01-21 19:11:26.350058', 'datetime.datetime(2023, 1, 21, 19, 11, 36, 147457)',
                     [[['Evens', 4], ['Clara', 1]], [['Elodie', 0], ['Chelsea', 2]],
                      [['Nina', 1], ['Seven', 2]], [['Kylian', 2], ['Elohim', 3]]]],
-                   ['Round n°2', '2023-01-21 19:11:43.397692', datetime.datetime(2023, 1, 21, 19, 11, 47, 349600),
+                   ['Round n°2', '2023-01-21 19:11:43.397692', 'datetime.datetime(2023, 1, 21, 19, 11, 47, 349600)',
                     [(['Evens', 4], ['Elodie', 0]), (['Seven', 2], ['Chelsea', 2]),
                      (['Kylian', 2], ['Nina', 1]), (['Clara', 1], ['Elohim', 3])]],
-                   ['Round n°3', None, datetime.datetime(2023, 1, 21, 19, 11, 55, 29699),
+                   ['Round n°3', None, 'datetime.datetime(2023, 1, 21, 19, 11, 55, 29699)',
                     [[['Evens', 4], ['Kylian', 2]], [['Seven', 2], ['Chelsea', 2]], [['Elohim', 3], ['Elodie', 0]],
                      [['Nina', 1], ['Clara', 1]]]],
-                   ['Round n°4', None, datetime.datetime(2023, 1, 21, 19, 12, 6, 201584),
+                   ['Round n°4', None, 'datetime.datetime(2023, 1, 21, 19, 12, 6, 201584)',
                     [[['Evens', 4], ['Chelsea', 2]], [['Kylian', 2], ['Elohim', 3]], [['Seven', 2], ['Clara', 1]], [['Elodie', 0], ['Nina', 1]]]]]],
                  ['American Express', 'Paris',
                   [['Evens', 'JOSEPH', '13/06/1991', 'm', '1'],
@@ -107,17 +109,17 @@ TOURNOIS_LIST = [['Al Nasser', 'Paris',
                    ['Chelsea', 'JOSEPH', '12/05/2025', 'f', '6'],
                    ['Seven', 'JOSEPH', '12/05/2025', 'f', '7'],
                    ['Elohim', 'JOSEPH', '04/06/2027', 'm', '8']],
-                  'bullet', 'RA', datetime.datetime(2023, 1, 21, 19, 11, 11, 627838), 4,
-                  [['Round n°1', '2023-01-21 19:11:26.350058', datetime.datetime(2023, 1, 21, 19, 11, 36, 147457),
+                  'bullet', 'RA', 'datetime.datetime(2023, 1, 21, 19, 11, 11, 627838)', 4,
+                  [['Round n°1', '2023-01-21 19:11:26.350058', 'datetime.datetime(2023, 1, 21, 19, 11, 36, 147457)',
                     [[['Evens', 4], ['Clara', 1]], [['Elodie', 0], ['Chelsea', 2]],
                      [['Nina', 1], ['Seven', 2]], [['Kylian', 2], ['Elohim', 3]]]],
-                   ['Round n°2', '2023-01-21 19:11:43.397692', datetime.datetime(2023, 1, 21, 19, 11, 47, 349600),
+                   ['Round n°2', '2023-01-21 19:11:43.397692', 'datetime.datetime(2023, 1, 21, 19, 11, 47, 349600)',
                     [(['Evens', 4], ['Elodie', 0]), (['Seven', 2], ['Chelsea', 2]),
                      (['Kylian', 2], ['Nina', 1]), (['Clara', 1], ['Elohim', 3])]],
-                   ['Round n°3', None, datetime.datetime(2023, 1, 21, 19, 11, 55, 29699),
+                   ['Round n°3', None, 'datetime.datetime(2023, 1, 21, 19, 11, 55, 29699)',
                     [[['Evens', 4], ['Kylian', 2]], [['Seven', 2], ['Chelsea', 2]], [['Elohim', 3], ['Elodie', 0]],
                      [['Nina', 1], ['Clara', 1]]]],
-                   ['Round n°4', None, datetime.datetime(2023, 1, 21, 19, 12, 6, 201584),
+                   ['Round n°4', None, 'datetime.datetime(2023, 1, 21, 19, 12, 6, 201584)',
                     [[['Evens', 4], ['Chelsea', 2]], [['Kylian', 2], ['Elohim', 3]], [['Seven', 2], ['Clara', 1]],
                      [['Elodie', 0], ['Chantal', 1]]]]]]
                  ]
@@ -152,8 +154,8 @@ class Rounds:
                  end = str(),
                  matches = []):
 
-        self.start = datetime.datetime.now()
-        self.end = datetime.datetime.now()
+        self.start = str(datetime.datetime.now())
+        self.end = str(datetime.datetime.now())
         self.matches = matches
 
     # initialiser le 1er round quand le tournoi est créé
@@ -292,14 +294,14 @@ class Rounds:
 
 
                     launch_round = []
-                    launch_round.append("Round n°" + str(len(LIST_ROUNDS) + 1))
+                    launch_round.append("Round numero " + str(len(LIST_ROUNDS) + 1))
                     launch_round.append(str(self.start))
                     launch_round.append(None)
                     launch_round.append(second_round)
                     LIST_ROUNDS.append(launch_round)
 
                     print("")
-                    print("Le round n°",len(LIST_ROUNDS), " est prêt")
+                    print("Le round numero ",len(LIST_ROUNDS), " est prêt")
                     print("Vous pouvez entrer les résultats des nouveaux matchs en sélectionnant la touche 3' ")
                     print("")
 
@@ -324,7 +326,7 @@ class Rounds:
                     duel_ready_to_control.append([ranking_round[6], ranking_round[7]])
 
                     launch_round = []
-                    launch_round.append("Round n°" + str(len(LIST_ROUNDS) + 1))
+                    launch_round.append("Round numero " + str(len(LIST_ROUNDS) + 1))
                     launch_round.append(None)
                     launch_round.append(None)
                     launch_round.append(duel_ready_to_control)
@@ -357,7 +359,7 @@ class Tournois():
                  joueurs=[],
                  temps=None,
                  description=None,
-                 date=datetime.datetime.now(),
+                 date=str(datetime.datetime.now()),
                  nombre_tours=1, tournees=[]):
 
         self.nom = nom
@@ -461,20 +463,46 @@ class Tournois():
 
     def export_data(self):
 
-        key_tournament = "list_of_tournament"
-        key_players = "list_of_players_subscribed"
-        key_rounds = "list_of_rounds"
+        ################################################
+        # Convert tournois de Liste vers Dictionnaire
 
-        def convert_string_to_dict(string, key):
-            return {key: string}
+        tournois_dict_list = []
+        for tournament in TOURNOIS_LIST:
+            tournoi = {
+                "nom_competition": tournament[0],
+                "ville": tournament[1],
+                "liste_joueurs": tournament[2],
+                "coup": tournament[3],
+                "description": tournament[4],
+                "date_debut": tournament[5],
+                "nb_tour": tournament[6],
+                "liste_rounds": tournament[7]
+            }
+            tournois_dict_list.append(tournoi)
 
-        tournament_converted = convert_string_to_dict(str(TOURNOIS_LIST), key_tournament)
-        rounds_converted = convert_string_to_dict(str(LIST_ROUNDS), key_rounds)
-        players_converted = convert_string_to_dict(str(PLAYER_SUBSCRIBED), key_players)
+        ##############################################################
+        # Convert Rounds  Liste vers Dictionnaire
+        def list_to_dict(lst):
+            my_dict = {}
+            for i, item in enumerate(lst):
+                my_dict[i] = item
+            return my_dict
 
-        db.insert(tournament_converted)
-        db.insert(rounds_converted)
-        db.insert(players_converted)
+        list_to_dict(LIST_ROUNDS)
+
+        ##############################################################
+        # Convert Player  Liste vers Dictionnaire
+        player_subscribed_dict = {i: player for i, player in enumerate(PLAYER_SUBSCRIBED)}
+
+        tournament_converted = tournois_dict_list[0]
+        rounds_converted = list_to_dict(LIST_ROUNDS)
+        players_converted = player_subscribed_dict = {i: player for i, player in enumerate(PLAYER_SUBSCRIBED)}
+
+        chess.insert(tournament_converted)
+        chess.insert(rounds_converted)
+        chess.insert(players_converted)
+
+        ################################################
 
         print("")
         print("=================================================================")
@@ -482,4 +510,26 @@ class Tournois():
         print("Vous pouvez à tout moment recharger votre dernière sauvegarde")
         print("=================================================================")
         print("")
+
+    def import_data(self):
+
+        # Importation des listes
+        tournament_imported = chess.get(doc_id=1)
+        rounds_imported = chess.get(doc_id=2)
+        players_imported = chess.get(doc_id=3)
+
+        # Test importation
+        print(type(tournament_imported))
+        print("")
+
+        # Test importation
+        print(rounds_imported)
+        print("")
+
+        # Test importation
+        print(type(players_imported))
+        print("")
+
+        # fonction de conversion
+
 

@@ -750,7 +750,7 @@ class SaveController:
 
 
     def import_game(self):
-        pass
+        Tournois().import_data()
 
 
 
