@@ -1,5 +1,5 @@
 from views.display import Display
-from models.all import Player, PLAYER_SUBSCRIBED, TOURNOIS_LIST, LIST_OF_DUEL, LIST_ROUNDS, Tournois
+from models.all import Player, PLAYER_SUBSCRIBED, TOURNOIS_LIST, LIST_ROUNDS, Tournois
 
 
 
@@ -426,9 +426,9 @@ class RapportController:
 
         menu = ["Acteurs par ordre alphabétique",
                 "Acteurs par classement ",
-                "Joueurs par ordre alphabétique dans un Tournois",
-                "Joueurs par classement dans un Tournois",
-                "Liste de tous les Tournois",
+                "Joueurs par ordre alphabétique dans un Tournoi",
+                "Joueurs par classement dans un Tournoi",
+                "Liste de tous les Tournoi",
                 "Liste de tous les Tours d'un tournoi",
                 "Liste de tous les Matchs d'un tournoi", "Retour"]
 
@@ -502,15 +502,18 @@ class RapportController:
         print("")
         print("==========================================================")
         print(
-            f"Sélectionnez le Tournois de votre choix ci-dessous  ")
+            f"Sélectionnez le Tournoi de votre choix ci-dessous  ")
         print("==========================================================")
         print("")
 
-        index_item = 0
 
+
+        index_item = 0
         for item in TOURNOIS_LIST:
             index_item += 1
-            print(index_item, " -- ", item[0])
+            print(index_item," -- ", item[0])
+            print("")
+
 
         def ordering_player_tournament(tournament):
 
@@ -536,8 +539,7 @@ class RapportController:
 
 
         elif response == str(2):
-
-            ordering_player_tournament(int(response) - 1)
+            self.menu_tournois()
 
     def report_order_by_ranking_tournament(self):
 
@@ -547,7 +549,7 @@ class RapportController:
         print("")
         print("==========================================================")
         print(
-            f"Sélectionnez le Tournois de votre choix ci-dessous  ")
+            f"Sélectionnez le Tournoi de votre choix ci-dessous  ")
         print("==========================================================")
         print("")
 
@@ -556,6 +558,9 @@ class RapportController:
         for item in TOURNOIS_LIST:
             index_item += 1
             print(index_item, " -- ", item[0])
+
+        response = input("Choisissez votre tournoi en sélectionnant le numéro : ")
+        print("")
 
         def ordering_player_tournament_by_ranking(tournament):
 
@@ -750,13 +755,5 @@ class SaveController:
 
     def import_game(self):
         Tournois().import_data()
-
-
-
-
-
-
-        self.menu_tournois()
-
 
 

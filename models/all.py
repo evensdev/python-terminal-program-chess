@@ -607,11 +607,15 @@ class Tournois():
         for item in player_dict_to_list:
             PLAYER_SUBSCRIBED.append(item)
 
+        tournois_cache = []
         for item in tournois_dict_to_list:
-            TOURNOIS_LIST.append(item)
+            tournois_cache.append(item)
+        TOURNOIS_LIST.append(tournois_cache)
 
         for item in dict_to_list(rounds_imported):
             LIST_ROUNDS.append(item)
+
+
 
         ####################
 
@@ -631,8 +635,4 @@ class Tournois():
 
         print(type(players_imported))
         print("")
-
-        # fonction de conversion
-
-
 
