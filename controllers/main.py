@@ -1,5 +1,6 @@
 from views.display import Display
-from models.all import Player, PLAYER_SUBSCRIBED, TOURNOIS_LIST, LIST_ROUNDS, Tournois
+from models.players import PLAYER_SUBSCRIBED, Player
+from models.tournament import TOURNOIS_LIST, LIST_ROUNDS, Rounds, Tournois
 
 
 
