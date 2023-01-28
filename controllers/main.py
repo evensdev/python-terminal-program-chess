@@ -94,35 +94,44 @@ class PlayerController:
     def create_player(self):
 
         self.display.affiche("                                       ")
-        self.display.affiche("-------------------------------------------------- ")
+        self.display.affiche("============================================================================================ ")
         self.display.affiche("Ajout d'un nouveau joueur")
-        self.display.affiche("!!! Attention vous ne pouvez pas revenir en arrière si vous avez fait une erreur sur l'ajout du joueur !!! ")
-        self.display.affiche("Allez au bout de l'inscription, puis de supprimez le joueur si vous souhaitez faire un changement")
-        self.display.affiche("-------------------------------------------------- ")
+        self.display.affiche("------------------------- ")
+        self.display.affiche("***  ATTENTION... VOUS NE POUVEZ PAS REVENIR EN ARRIÈRE SI VOUS AVEZ FAIT UNE ERREUR ! ***")
+        self.display.affiche("***  VEUILLEZ SUPPRIMER LE JOUEUR SI VOUS SOUHAITEZ FAIRE UN CHANGEMENT PAR LA SUITE. ***")
+        self.display.affiche("============================================================================================ ")
         self.display.affiche("                                       ")
         self.display.affiche("                                       ")
 
         self.display.affiche("ÉTAPE 1/5 - PRÉNOM")
         prenom = input(f'Ajoutez le prénom du joueur : ')
+        print("")
+
         self.display.affiche("ÉTAPE 2/5 - NOM")
         nom = input('Ajoutez le nom joueur n°1 : ')
+        print("")
+
         self.display.affiche("ÉTAPE 3/5 - DATE DE NAISSANCE")
         date_naissance = input('Ajoutez la date de naissance du joueur jj/mm/aaaa : ')
+        print("")
+
         self.display.affiche("ÉTAPE 4/5 - GENRE")
         genre = input('Ajoutez le genre du joueur ("m"/"f"/"nb") : ')
+        print("")
+
         self.display.affiche("ÉTAPE 5/5 - CLASSEMENT")
         classement = input('Ajoutez le classement du joueur : ')
 
+
         player = Player(prenom, nom, date_naissance, genre, classement)
         self.display.affiche("                                       ")
-        print(player.save())
+        player.save()
 
         self.display.affiche("                                       ")
         self.display.affiche("                                       ")
         self.display.affiche("*********************************************************")
-        self.display.affiche(f'Le nouveau joueur {player.prenom} {player.nom} est ajouté avec succès ! ')
+        self.display.affiche(f'Le nouveau joueur {player.prenom} {player.nom} a été ajouté avec succès ! ')
         self.display.affiche("*********************************************************")
-
 
 
 
@@ -298,7 +307,7 @@ class TournoisController:
         else:
             Tournois().make_tournament()
             Rounds().initialize_round()
-            print("Sauvegarde de la liste round", LIST_ROUNDS)
+            #print("Sauvegarde de la liste round", LIST_ROUNDS)
 
         self.menu_tournois()
 
@@ -364,7 +373,7 @@ class TournoisController:
                     print(item[0], item[1])
 
                 else:
-                    print("Pas bon du tout !!!!!")
+                    print("Ce n'est pas une bonne réponse...")
 
             Rounds().end_round()
 
@@ -416,7 +425,7 @@ class TournoisController:
 
         if len(TOURNOIS_LIST) == 0:
             print("")
-            print("Il n'y a pas de tournois dans la liste. Veuillez créer un tournoi.")
+            print("Il n'y a pas de tournoi(s) dans la liste. Veuillez créer un tournoi.")
 
         else:
 
@@ -453,7 +462,7 @@ class RapportController:
                 "Acteurs par classement ",
                 "Joueurs par ordre alphabétique dans un Tournoi",
                 "Joueurs par classement dans un Tournoi",
-                "Liste de tous les Tournoi",
+                "Liste de tous les Tournois",
                 "Liste de tous les Tours d'un tournoi",
                 "Liste de tous les Matchs d'un tournoi", "Retour"]
 
@@ -741,8 +750,9 @@ class RapportController:
 
             for item in TOURNOIS_LIST:
                 index_item += 1
-                print(index_item, item[0])
+                print(index_item," -- ", item[0])
 
+            print("")
             response = input("Choisissez votre tournoi en sélectionnant le numéro : ")
             print("")
 

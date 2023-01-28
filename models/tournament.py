@@ -56,7 +56,7 @@ class Rounds:
             second_list = list_player[half:]
 
             zip(first_list, second_list)
-            print(zip(first_list, second_list))
+            #print(zip(first_list, second_list))
 
             # créer des paires de match avec la fonction zip
             return list(zip(first_list, second_list))
@@ -121,7 +121,7 @@ class Rounds:
 
                 if len(LIST_ROUNDS) < 2:
 
-                    print("OPTION 1")
+                    #print("OPTION 1")
                     ranking_round = []
 
                     for item in LIST_ROUNDS[-1][3]:
@@ -170,7 +170,7 @@ class Rounds:
                     print(LIST_ROUNDS)
 
                 else :
-                    print("OPTION 2")
+                    #print("OPTION 2")
                     ranking_round = []
 
                     for item in LIST_ROUNDS[1][3]:
@@ -210,6 +210,8 @@ class Rounds:
 
     def end_round(self):
         LIST_ROUNDS[-1][2] = datetime.datetime.now()
+        print("INFO : L'horaire de la fin de Round est enregistré maintenant")
+        print("")
  
 class Tournois():
 
@@ -272,7 +274,7 @@ class Tournois():
                 print("Tous les joueurs sont inscrits pour ce tournoi")
                 print('')
                 self.save()
-            print('Le Tournoi **',TOURNOIS_LIST[-1][0], '** a bien a bien été créé')
+            print('Le Tournoi **', TOURNOIS_LIST[-1][0], '** a bien a bien été créé')
             print('')
             print('Voici la liste des matchs du Round n°1')
             print('')
@@ -303,7 +305,7 @@ class Tournois():
 
         TOURNOIS_LIST.append(item_tournois)
 
-        return item_tournois
+        #return item_tournois
 
 
     def update_nombre_tours(self):
@@ -328,9 +330,9 @@ class Tournois():
             print("")
 
             # Element ci-dessous à effacer après avoir vérifié tournois_list
-            print("RECAPITULATIF DE LA TABLE TOURNOIS_LIST")
-            print(TOURNOIS_LIST)
-            LIST_ROUNDS = []
+            #print("RECAPITULATIF DE LA TABLE TOURNOIS_LIST")
+            #print(TOURNOIS_LIST)
+            #LIST_ROUNDS = []
 
 
     def export_data(self):
@@ -396,19 +398,19 @@ class Tournois():
 
         # Test importation
 
-        print(tournament_imported)
+        #print(tournament_imported)
 
-        print(type(tournament_imported))
+        #print(type(tournament_imported))
 
         print("")
 
         # Test importation
-        print(rounds_imported)
+        #print(rounds_imported)
         print("")
 
         # Test importation
 
-        print(players_imported)
+        #print(players_imported)
         print("")
 
         ########################################################
@@ -423,7 +425,7 @@ class Tournois():
         # Convert Tournois de Dictionnaire JSON vers Liste
         tournois_dict_to_list = list(tournament_imported.values())
 
-        print(tournois_dict_to_list)
+        #print(tournois_dict_to_list)
 
         #######################################################
 
@@ -456,6 +458,6 @@ class Tournois():
         print("=================================================================")
         print("")
 
-        print(type(players_imported))
+        #print(type(players_imported))
         print("")
 
