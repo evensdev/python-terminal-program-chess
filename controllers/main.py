@@ -68,28 +68,27 @@ class PlayerController:
         response = self.display.get_input('Choisissez un chiffre pour aller sur le menu de votre choix :  ', 'number')
 
 
-        while response != len(menu):
+        #while response != len(menu):
 
 
-            if (response == 1):
-                PlayerController().create_player()
+        if (response == 1):
+            PlayerController().create_player()
 
-            elif (response == 2):
-                PlayerController().delete_player()
+        elif (response == 2):
+            PlayerController().delete_player()
 
-            elif (response == 3):
-                PlayerController().list_of_player()
+        elif (response == 3):
+            PlayerController().list_of_player()
 
-            elif response == 4:
-                PlayerController().update_ranking_player()
+        elif response == 4:
+            PlayerController().update_ranking_player()
 
-            elif response == 5:
-                MainController().main()
+        elif response == 5:
+            MainController().main()
 
-
-            else:
-                self.display.affiche("-------------------------------------------------- ")
-                response = self.display.get_input('Votre choix est incorrect, réessayez : ', "number")
+        else:
+            self.display.affiche("-------------------------------------------------- ")
+            response = self.display.get_input('Votre choix est incorrect, réessayez : ', "number")
 
 
     def create_player(self):
@@ -97,15 +96,21 @@ class PlayerController:
         self.display.affiche("                                       ")
         self.display.affiche("-------------------------------------------------- ")
         self.display.affiche("Ajout d'un nouveau joueur")
+        self.display.affiche("!!! Attention vous ne pouvez pas revenir en arrière si vous avez fait une erreur sur l'ajout du joueur !!! ")
+        self.display.affiche("Allez au bout de l'inscription, puis de supprimez le joueur si vous souhaitez faire un changement")
         self.display.affiche("-------------------------------------------------- ")
         self.display.affiche("                                       ")
         self.display.affiche("                                       ")
 
-
+        self.display.affiche("ÉTAPE 1/5 - PRÉNOM")
         prenom = input(f'Ajoutez le prénom du joueur : ')
+        self.display.affiche("ÉTAPE 2/5 - NOM")
         nom = input('Ajoutez le nom joueur n°1 : ')
+        self.display.affiche("ÉTAPE 3/5 - DATE DE NAISSANCE")
         date_naissance = input('Ajoutez la date de naissance du joueur jj/mm/aaaa : ')
-        genre = input('Ajoutez le genre du joueur ("m"/"f") : ')
+        self.display.affiche("ÉTAPE 4/5 - GENRE")
+        genre = input('Ajoutez le genre du joueur ("m"/"f"/"nb") : ')
+        self.display.affiche("ÉTAPE 5/5 - CLASSEMENT")
         classement = input('Ajoutez le classement du joueur : ')
 
         player = Player(prenom, nom, date_naissance, genre, classement)
@@ -117,7 +122,9 @@ class PlayerController:
         self.display.affiche("*********************************************************")
         self.display.affiche(f'Le nouveau joueur {player.prenom} {player.nom} est ajouté avec succès ! ')
         self.display.affiche("*********************************************************")
-        self.menu_players()
+
+
+
 
     def delete_player(self):
 
@@ -136,7 +143,7 @@ class PlayerController:
             self.display.affiche("                                       ")
             self.display.affiche("                                       ")
 
-            response = self.display.get_input('Choisissez le bon numéro pour supprimer le joueur de votre choix :  ',
+            response = self.display.get_input('Choisissez le bon numéro pour supprimer le joueur de votre choix ou tapez "0" pour revenir en arrière :  ',
                                               'number')
 
             if response > quantite:
@@ -144,13 +151,16 @@ class PlayerController:
                 print("Ce numéro de joueurs n'existe pas !  Retour au menu.")
                 print("")
 
+            elif response == 0:
+                PlayerController().menu_players()
+
             else:
                 deleting = PLAYER_SUBSCRIBED.pop(response - 1)
                 print("")
                 print("Le joueur a été supprimé ! ")
                 print("")
 
-            PlayerController().menu_players()
+        PlayerController().menu_players()
 
     def list_of_player(self):
 
@@ -196,18 +206,21 @@ class PlayerController:
                 print(numero, " . ", player[0], "  classement : ", player[-1])
 
             print("")
-            response = input("Sélectionner votre joueur en choisissant le bon numéro :   ")
+            response = input("Sélectionnez votre joueur en choisissant le bon numéro d'index sur la gauche ou tapez sur la touche '0' pour revenir en arrière :   ")
             response = int(response)
             print("")
 
-            updating = input(
-                f"Chosissez le nouveau n° de classement du joueur  {PLAYER_SUBSCRIBED[response - 1][0]} :  ")
+            if response == 0:
+                PlayerController().menu_players()
+            else:
+                updating = input(
+                    f"Chosissez le nouveau n° de classement du joueur  {PLAYER_SUBSCRIBED[response - 1][0]} :  ")
 
-            PLAYER_SUBSCRIBED[response - 1][-1] = int(updating)
-            print("")
-            print("")
-            print(PLAYER_SUBSCRIBED[response - 1][0],
-                  f" est maintenant classé(e) à la place n°{PLAYER_SUBSCRIBED[response - 1][-1]}")
+                PLAYER_SUBSCRIBED[response - 1][-1] = int(updating)
+                print("")
+                print("")
+                print(PLAYER_SUBSCRIBED[response - 1][0],
+                      f" est maintenant classé(e) à la place n°{PLAYER_SUBSCRIBED[response - 1][-1]}")
 
 
         PlayerController().menu_players()
@@ -295,52 +308,61 @@ class TournoisController:
     # Mise à jour des résultats
     def update_result(self):
 
-        for item in LIST_ROUNDS[-1][3]:
-
+        if LIST_ROUNDS == []:
             print("")
-            numero = 1
-
+            print(" ***  VOUS NE POUVEZ PAS METTRE À JOUR LES RÉSULTATS SI VOUS N'AVEZ PAS CRÉÉ UN TOURNOI *** ")
             print("")
-            print("")
-            print("Désignez le vainqueur de ce match ")
-            print("--------------------------------- ")
+            print("############################# ")
+            print(" VEUILLEZ CRÉER UN TOURNOI")
+            print("############################# ")
 
-            print("1 . ", item[0][0])
-            print("2 . ", item[1][0])
-            print("0 .  Match nul")
-            print("")
 
-            response = self.display.get_input('Qui est le vainqueur du match ? Choisissez le chiffre 1, 2 ou 0 :   ',
-                                              'number')
-
-            if (response == 1):
-                item[0][1] += 1
+        else:
+            for item in LIST_ROUNDS[-1][3]:
 
                 print("")
-                print(item[0][0], " est le vainqueur de ce match !")
-                print(item[0])
-
-            elif (response == 2):
-                item[1][1] += 1
+                numero = 1
 
                 print("")
-                print(item[1][0], " est le vainqueur de ce match !")
-                print(item[1])
-
-            elif (response == 0):
-                item[0][1] += 0.5
-                item[1][1] += 0.5
-
                 print("")
-                print("Match nul entre ", item[0][0], " et ", item[1][0], " ! ")
-                print(item[0], item[1])
+                print("Désignez le vainqueur de ce match ")
+                print("--------------------------------- ")
 
-            else:
-                print("Pas bon du tout !!!!!")
+                print("1 . ", item[0][0])
+                print("2 . ", item[1][0])
+                print("0 .  Match nul")
+                print("")
 
-        Rounds().end_round()
+                response = self.display.get_input(
+                    'Qui est le vainqueur du match ? Choisissez le chiffre 1, 2 ou 0 :   ',
+                    'number')
 
+                if (response == 1):
+                    item[0][1] += 1
 
+                    print("")
+                    print(item[0][0], " est le vainqueur de ce match !")
+                    print(item[0])
+
+                elif (response == 2):
+                    item[1][1] += 1
+
+                    print("")
+                    print(item[1][0], " est le vainqueur de ce match !")
+                    print(item[1])
+
+                elif (response == 0):
+                    item[0][1] += 0.5
+                    item[1][1] += 0.5
+
+                    print("")
+                    print("Match nul entre ", item[0][0], " et ", item[1][0], " ! ")
+                    print(item[0], item[1])
+
+                else:
+                    print("Pas bon du tout !!!!!")
+
+            Rounds().end_round()
 
 
 
@@ -466,140 +488,128 @@ class RapportController:
 
     def order_actor_by_alphabet(self):
 
-        print("")
-        print("")
-        print("==========================================================")
-        print("Voici la liste de Acteurs classés par ordre Alphabétique: ")
-        print("==========================================================")
+        if PLAYER_SUBSCRIBED == []:
+            print("")
+            print(" ***  IL N'Y A PAS DE JOUEURS INSCRITS *** ")
+            print("")
+            RapportController().menu_rapports()
 
-        number = 0
+        else:
+            print("")
+            print("")
+            print("==========================================================")
+            print("Voici la liste de Acteurs classés par ordre Alphabétique: ")
+            print("==========================================================")
 
-        for item in sorted(PLAYER_SUBSCRIBED):
-            number += 1
-            print(f" {number} -- {item[0]}")
+            number = 0
+
+            for item in sorted(PLAYER_SUBSCRIBED):
+                number += 1
+                print(f" {number} -- {item[0]}")
+
+
 
     def report_order_by_ranking(self):
 
-        # Acteurs par classement
+        if PLAYER_SUBSCRIBED == []:
+            print("")
+            print(" ***  IL N'Y A PAS DE JOUEURS INSCRITS *** ")
+            print("")
+            RapportController().menu_rapports()
 
-        print("==========================================================")
-        print("Voici la liste d'Acteurs par Ordre de Classement : ")
-        print("==========================================================")
+        else:
 
-        number = 0
+            # Acteurs par classement
 
-        # les paramètres de la fonctions permettent de classer en fonction de l'élément de liste de mon choixs
-        for item in sorted(PLAYER_SUBSCRIBED, key=lambda PLAYER: PLAYER[-1]):
-            number += 1
-            print(f" {number} -- {item[0]} || classement : n°{item[-1]} ")
+            print("==========================================================")
+            print("Voici la liste d'Acteurs par Ordre de Classement : ")
+            print("==========================================================")
+
+            number = 0
+
+            # les paramètres de la fonctions permettent de classer en fonction de l'élément de liste de mon choixs
+            for item in sorted(PLAYER_SUBSCRIBED, key=lambda PLAYER: PLAYER[-1]):
+                number += 1
+                print(f" {number} -- {item[0]} || classement : n°{item[-1]} ")
 
     def report_order_by_alpabet_tournament(self):
 
-        # Joueurs par ordre alphabétique d'un tournois
-
-        print("")
-        print("")
-        print("==========================================================")
-        print(
-            f"Sélectionnez le Tournoi de votre choix ci-dessous  ")
-        print("==========================================================")
-        print("")
-
-
-
-        index_item = 0
-        for item in TOURNOIS_LIST:
-            index_item += 1
-            print(index_item," -- ", item[0])
+        if TOURNOIS_LIST == []:
             print("")
+            print(" ***  IL N'Y A PAS DE TOURNOIS EXISTANT *** ")
+            print("")
+            RapportController().menu_rapports()
+        else:
+
+            # Joueurs par ordre alphabétique d'un tournois
+
+            print("")
+            print("")
+            print("==========================================================")
+            print(
+                f"Sélectionnez le Tournoi de votre choix ci-dessous  ")
+            print("==========================================================")
+            print("")
+
+
+
+            index_item = 0
+            for item in TOURNOIS_LIST:
+                index_item += 1
+                print(index_item," -- ", item[0])
+                print("")
 
 
         def ordering_player_tournament(tournament):
 
-            list_sorted = sorted(TOURNOIS_LIST[tournament][2])
-            index_item = 0
+            if TOURNOIS_LIST == []:
+                print("")
+                print(" ***  IL N'Y A PAS DE TOURNOIS EXISTANT *** ")
+                print("")
+                RapportController().menu_rapports()
 
-            print("==========================================================")
-            print(
-                f"Voici la liste de joueurs du tournoi *** {TOURNOIS_LIST[tournament][0]} *** par ordre alphabétique : ")
-            print("==========================================================")
+            else:
+                list_sorted = sorted(TOURNOIS_LIST[tournament][2])
+                index_item = 0
+
+                print("==========================================================")
+                print(
+                    f"Voici la liste de joueurs du tournoi *** {TOURNOIS_LIST[tournament][0]} *** par ordre alphabétique : ")
+                print("==========================================================")
+                print("")
+
+                for item in list_sorted:
+                    index_item += 1
+                    print(f" {index_item} -- {item[0]}")
+
+            print("")
+            response = input("Choisissez votre tournoi en sélectionnant le bon numéro : ")
             print("")
 
-            for item in list_sorted:
-                index_item += 1
-                print(f" {index_item} -- {item[0]}")
-
-        print("")
-        response = input("Choisissez votre tournoi en sélectionnant le bon numéro : ")
-        print("")
-
-        if response == str(1):
-            ordering_player_tournament(int(response) - 1)
+            if response == str(1):
+                ordering_player_tournament(int(response) - 1)
 
 
-        elif response == str(2):
-            self.menu_tournois()
+            elif response == str(2):
+                self.menu_tournois()
 
     def report_order_by_ranking_tournament(self):
 
-        # Joueurs par classement d'un Tournois
-
-        print("")
-        print("")
-        print("==========================================================")
-        print(
-            f"Sélectionnez le Tournoi de votre choix ci-dessous  ")
-        print("==========================================================")
-        print("")
-
-        index_item = 0
-
-        for item in TOURNOIS_LIST:
-            index_item += 1
-            print(index_item, " -- ", item[0])
-
-        response = input("Choisissez votre tournoi en sélectionnant le numéro : ")
-        print("")
-
-        def ordering_player_tournament_by_ranking(tournament):
-
-            list_sorted = sorted(TOURNOIS_LIST[tournament][2], key=lambda TOURNOIS: TOURNOIS[-1])
-            index_item = 0
-
-            print("==========================================================")
-            print(
-                f"Voici la liste de joueurs du tournoi *** {TOURNOIS_LIST[tournament][0]} *** par ordre de CLASSEMENT : ")
-            print("==========================================================")
+        if TOURNOIS_LIST == []:
             print("")
-
-            for item in list_sorted:
-                index_item += 1
-                print(f" {index_item} -- {item[0]} || classement n°{item[-1]}")
-
-        print("")
-        response = input("Choisissez votre tournoi en sélectionnant le bon numéro : ")
-        print("")
-
-        if response == str(1):
-            ordering_player_tournament_by_ranking(int(response) - 1)
-
-
-        elif response == str(2):
-            ordering_player_tournament_by_ranking(int(response) - 1)
-
-    def list_of_tournament(self):
-
-        # Liste de tous les Tournois
-
-        if len(TOURNOIS_LIST) == 0:
+            print(" ***  IL N'Y A PAS DE TOURNOIS EXISTANT *** ")
             print("")
-            print("Il n'y a pas de tournois dans la liste. Veuillez créer un tournoi.")
-
+            RapportController().menu_rapports()
         else:
 
-            print("=============================")
-            print("Voici la liste des Tournois")
-            print("=============================")
+            # Joueurs par classement d'un Tournois
+
+            print("")
+            print("")
+            print("==========================================================")
+            print(
+                f"Sélectionnez le Tournoi de votre choix ci-dessous  ")
+            print("==========================================================")
             print("")
 
             index_item = 0
@@ -608,114 +618,184 @@ class RapportController:
                 index_item += 1
                 print(index_item, " -- ", item[0])
 
+            response = input("Choisissez votre tournoi en sélectionnant le numéro : ")
+            print("")
+
+            def ordering_player_tournament_by_ranking(tournament):
+
+                list_sorted = sorted(TOURNOIS_LIST[tournament][2], key=lambda TOURNOIS: TOURNOIS[-1])
+                index_item = 0
+
+                print("==========================================================")
+                print(
+                    f"Voici la liste de joueurs du tournoi *** {TOURNOIS_LIST[tournament][0]} *** par ordre de CLASSEMENT : ")
+                print("==========================================================")
+                print("")
+
+                for item in list_sorted:
+                    index_item += 1
+                    print(f" {index_item} -- {item[0]} || classement n°{item[-1]}")
+
+            print("")
+
+            if response == str(1):
+                ordering_player_tournament_by_ranking(int(response) - 1)
+
+
+            elif response == str(2):
+                ordering_player_tournament_by_ranking(int(response) - 1)
+
+    def list_of_tournament(self):
+
+        if TOURNOIS_LIST == []:
+            print("")
+            print(" ***  IL N'Y A PAS DE TOURNOIS EXISTANT *** ")
+            print("")
+            RapportController().menu_rapports()
+        else:
+
+            # Liste de tous les Tournois
+
+            if len(TOURNOIS_LIST) == 0:
+                print("")
+                print("Il n'y a pas de tournois dans la liste. Veuillez créer un tournoi.")
+
+            else:
+
+                print("=============================")
+                print("Voici la liste des Tournois")
+                print("=============================")
+                print("")
+
+                index_item = 0
+
+                for item in TOURNOIS_LIST:
+                    index_item += 1
+                    print(index_item, " -- ", item[0])
+
 
     def rapport_list_round_tournament(self):
 
-        # Liste de tous les Tours d'un Tournoi
-
-        print("")
-        print("")
-        print("==========================================================")
-        print(
-            f"Sélectionnez le Tournois de votre choix ci-dessous  ")
-        print("==========================================================")
-        print("")
-
-        index_item = 0
-
-        for item in TOURNOIS_LIST:
-            index_item += 1
-            print(index_item, item[0])
-
-        response = input("Choisissez votre tournoi en sélectionnant le numéro : ")
-        print("")
-
-
-
-        if int(response) > len(TOURNOIS_LIST):
-            print("Ce n'est pas un bon numéro, choisissez votre tournoi en essayant une dernière fois")
-            response = input("Choisissez votre tournoi en sélectionnant le numéro : ")
-
+        if TOURNOIS_LIST == []:
+            print("")
+            print(" ***  IL N'Y A PAS DE TOURNOIS EXISTANT *** ")
+            print("")
+            RapportController().menu_rapports()
         else:
-            response = int(response)-1
-            for item in TOURNOIS_LIST[response][-1]:
-                print("-", item[0], "fin du round horodaté ici => ", item[2])
+
+            # Liste de tous les Tours d'un Tournoi
+
+            print("")
+            print("")
+            print("==========================================================")
+            print(
+                f"Sélectionnez le Tournois de votre choix ci-dessous  ")
+            print("==========================================================")
+            print("")
+
+            index_item = 0
+
+            for item in TOURNOIS_LIST:
+                index_item += 1
+                print(index_item, item[0])
+
+            response = input("Choisissez votre tournoi en sélectionnant le numéro : ")
+            print("")
+
+
+
+            if int(response) > len(TOURNOIS_LIST):
+                print("Ce n'est pas un bon numéro, choisissez votre tournoi en essayant une dernière fois")
+                response = input("Choisissez votre tournoi en sélectionnant le numéro : ")
+
+            else:
+                response = int(response)-1
+                for item in TOURNOIS_LIST[response][-1]:
+                    print("-", item[0], "fin du round horodaté ici => ", item[2])
+
 
     def rapport_list_match_tournament(self):
 
-        # Liste de tous les matchs d'un Tournoi
-
-        print("")
-        print("")
-        print("==========================================================")
-        print(
-            f"Sélectionnez le Tournois de votre choix ci-dessous  ")
-        print("==========================================================")
-        print("")
-
-        index_item = 0
-
-        for item in TOURNOIS_LIST:
-            index_item += 1
-            print(index_item, item[0])
-
-        response = input("Choisissez votre tournoi en sélectionnant le numéro : ")
-        print("")
-
-        if int(response) > len(TOURNOIS_LIST):
-            print("Ce n'est pas un bon numéro, choisissez votre tournoi en essayant une dernière fois")
-            response = input("Choisissez votre tournoi en sélectionnant le numéro : ")
-
+        if TOURNOIS_LIST == []:
+            print("")
+            print(" ***  IL N'Y A PAS DE TOURNOIS EXISTANT *** ")
+            print("")
+            RapportController().menu_rapports()
         else:
-            response = int(response) - 1
 
-            print(f"Voici la liste des matchs du Tournoi *** {TOURNOIS_LIST[response][0]} ***")
-            print("===================================================")
-            print("")
-            print("      | |  ")
-            print("      | |  ")
-            print("      \ /  ")
-            print("       v  ")
+            # Liste de tous les matchs d'un Tournoi
 
             print("")
-            print("Voici les matchs du ", TOURNOIS_LIST[response][-1][0][0])
             print("")
-            print("")
-
-            first_round = TOURNOIS_LIST[response][-1][0][-1]
-
-            for item in first_round:
-                print(item[0][0], " VS ", item[1][0])
-
-            print("")
-            print("Voici les matchs du ", TOURNOIS_LIST[response][-1][1][0])
-            print("")
+            print("==========================================================")
+            print(
+                f"Sélectionnez le Tournois de votre choix ci-dessous  ")
+            print("==========================================================")
             print("")
 
-            second_round = TOURNOIS_LIST[response][-1][1][-1]
+            index_item = 0
 
-            for item in second_round:
-                print(item[0][0], " VS ", item[1][0])
+            for item in TOURNOIS_LIST:
+                index_item += 1
+                print(index_item, item[0])
 
-            print("")
-            print("Voici les matchs du ", TOURNOIS_LIST[response][-1][2][0])
-            print("")
-            print("")
-
-            third_round = TOURNOIS_LIST[response][-1][2][-1]
-
-            for item in third_round:
-                print(item[0][0], " VS ", item[1][0])
-
-            print("")
-            print("Voici les matchs du ", TOURNOIS_LIST[response][-1][3][0])
-            print("")
+            response = input("Choisissez votre tournoi en sélectionnant le numéro : ")
             print("")
 
-            fourth_round = TOURNOIS_LIST[response][-1][3][-1]
+            if int(response) > len(TOURNOIS_LIST):
+                print("Ce n'est pas un bon numéro, choisissez votre tournoi en essayant une dernière fois")
+                response = input("Choisissez votre tournoi en sélectionnant le numéro : ")
 
-            for item in fourth_round:
-                print(item[0][0], " VS ", item[1][0])
+            else:
+                response = int(response) - 1
+
+                print(f"Voici la liste des matchs du Tournoi *** {TOURNOIS_LIST[response][0]} ***")
+                print("===================================================")
+                print("")
+                print("      | |  ")
+                print("      | |  ")
+                print("      \ /  ")
+                print("       v  ")
+
+                print("")
+                print("Voici les matchs du ", TOURNOIS_LIST[response][-1][0][0])
+                print("")
+                print("")
+
+                first_round = TOURNOIS_LIST[response][-1][0][-1]
+
+                for item in first_round:
+                    print(item[0][0], " VS ", item[1][0])
+
+                print("")
+                print("Voici les matchs du ", TOURNOIS_LIST[response][-1][1][0])
+                print("")
+                print("")
+
+                second_round = TOURNOIS_LIST[response][-1][1][-1]
+
+                for item in second_round:
+                    print(item[0][0], " VS ", item[1][0])
+
+                print("")
+                print("Voici les matchs du ", TOURNOIS_LIST[response][-1][2][0])
+                print("")
+                print("")
+
+                third_round = TOURNOIS_LIST[response][-1][2][-1]
+
+                for item in third_round:
+                    print(item[0][0], " VS ", item[1][0])
+
+                print("")
+                print("Voici les matchs du ", TOURNOIS_LIST[response][-1][3][0])
+                print("")
+                print("")
+
+                fourth_round = TOURNOIS_LIST[response][-1][3][-1]
+
+                for item in fourth_round:
+                    print(item[0][0], " VS ", item[1][0])
 
 
 class SaveController:

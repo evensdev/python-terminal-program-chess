@@ -270,10 +270,17 @@ class Tournois():
             print('Voici la liste des matchs du Round n°1')
             print('')
 
+
+
+        print("ÉTAPE 1/5 - NOM DU TOURNOIS")
         self.nom = input('Renseignez le Nom du Tournoi : ')
+        print("ÉTAPE 2/5 - LIEU")
         self.lieu = input('Renseignez le Lieu du Tournoi : ')
+        print("ÉTAPE 3/5 - TYPE DE COUP")
         self.temps = input('Chosissez votre coup | "un bullet", "un blitz" ou un "coup rapide" : ')
+        print("ÉTAPE 4/5 - DESCRIPTION")
         self.description = input('Renseignez les Remarques sur le Tournoi : ')
+        print("ÉTAPE 5/5 - AJOUT DE JOUEURS")
         self.joueurs = add_player_tournament()
 
     def save(self):
@@ -321,8 +328,6 @@ class Tournois():
 
     def export_data(self):
 
-
-        ################################################
 
         # Convert tournois de Liste vers Dictionnaire
 
@@ -399,7 +404,7 @@ class Tournois():
         print(players_imported)
         print("")
 
-        ##########################################################
+        ########################################################
         #
         # Convert Round  Dictionnaire vers Liste
         def dict_to_list(d):
