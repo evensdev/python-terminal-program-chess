@@ -155,10 +155,14 @@ class PlayerController:
                 PlayerController().menu_players()
 
             else:
+                name_deleted =[]
+                name_deleted.append(PLAYER_SUBSCRIBED[response - 1])
                 deleting = PLAYER_SUBSCRIBED.pop(response - 1)
                 print("")
-                print("Le joueur a été supprimé ! ")
+                print("Le joueur", name_deleted[0][0],name_deleted[0][1], "a été supprimé ! ")
                 print("")
+                name_deleted = []
+
 
         PlayerController().menu_players()
 
