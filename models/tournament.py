@@ -1,4 +1,6 @@
 from tinydb import TinyDB, Query, where
+
+import models.tournament
 from views.display import Display
 from models.players import PLAYER_SUBSCRIBED
 import datetime
@@ -10,6 +12,12 @@ chess = db.table('chess')
 
 LIST_ROUNDS = []
 TOURNOIS_LIST = []
+
+
+def clear_rounds():
+    LIST_ROUNDS.clear()
+    print("Cache vidé !")
+
 
 class Rounds:
     def __init__(self,
@@ -311,28 +319,11 @@ class Tournois():
     def update_nombre_tours(self):
         self.nombre_tours += 1
 
-    def close_tournament(self):
+    def purge_list_round(self):
+        global LIST_ROUNDS
+        LIST_ROUNDS = []
+        return print(LIST_ROUNDS)
 
-        print(TOURNOIS_LIST[-1][-2])
-
-        if TOURNOIS_LIST[-1][-2] < 4:
-            print("")
-            print("Le Tournoi n'est pas encore terminé")
-            print("Veuillez compléter tous les rounds afin de clôturer le Tournoi")
-            print("")
-
-        else:
-            print("")
-            print("Le Tournoi est maintenant clôturé !")
-            print("Cela signifie que : ")
-            print("- Vous ne pourrez plus modifier les résultats du tournoi clôturé")
-            print("- Vous ne pourrez plus créer de nouveau round sur le tournoi clôturé")
-            print("")
-
-            # Element ci-dessous à effacer après avoir vérifié tournois_list
-            #print("RECAPITULATIF DE LA TABLE TOURNOIS_LIST")
-            #print(TOURNOIS_LIST)
-            #LIST_ROUNDS = []
 
 
     def export_data(self):

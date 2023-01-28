@@ -1,3 +1,4 @@
+from models import tournament
 from views.display import Display
 from models.players import PLAYER_SUBSCRIBED, Player
 from models.tournament import TOURNOIS_LIST, LIST_ROUNDS, Rounds, Tournois
@@ -294,6 +295,8 @@ class TournoisController:
     # Créer un tournois
     def create_tournois(self):
 
+        global LIST_ROUNDS
+
         self.display.affiche("                                       ")
         self.display.affiche("-------------------------------------------------- ")
         self.display.affiche("Création d'un Nouveau Tournoi")
@@ -305,9 +308,19 @@ class TournoisController:
             print("Il vous faut 8 joueurs inscrits au minimum")
             print("")
         else:
-            Tournois().make_tournament()
-            Rounds().initialize_round()
-            #print("Sauvegarde de la liste round", LIST_ROUNDS)
+            if TOURNOIS_LIST == [] and LIST_ROUNDS == []:
+                Tournois().make_tournament()
+                Rounds().initialize_round()
+                #print("Sauvegarde de la liste round", LIST_ROUNDS)
+            else:
+                if LIST_ROUNDS == []:
+                    Tournois().make_tournament()
+                    Rounds().initialize_round()
+                else:
+                    print(LIST_ROUNDS)
+                    print("")
+                    print("Vous n'avez pas terminé votre tournoi. Veuillez terminer vos rounds ou clotûrer le tournoi si vous avez fait entré les résultats de tous les matchs")
+                    print("")
 
         self.menu_tournois()
 
@@ -450,8 +463,29 @@ class TournoisController:
 
 
     def close_tournament(self):
+        global LIST_ROUNDS
         TOURNOIS_LIST[-1][-1] = LIST_ROUNDS
-        Tournois().close_tournament()
+
+        if TOURNOIS_LIST == []:
+            print("il n'y a pas de tournoi, on ne peut rien clôturer")
+
+        else:
+            if TOURNOIS_LIST[-1][-2] == 4:
+                if LIST_ROUNDS[-1][-1][-1][-1][-1] != None:
+                    tournament.clear_rounds()
+                    print('')
+                    print("Le tournoi est clôturé")
+                    print('')
+                    print(LIST_ROUNDS)
+
+
+                else:
+                    print('')
+                    print("Vous n'avez pas encore entré les résultats du dernier Round")
+                    print("")
+            else:
+                print("Vous devez terminer tout vos Rounds avant de clôturer")
+
 
 
 

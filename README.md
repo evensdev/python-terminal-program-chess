@@ -40,3 +40,8 @@ Launch the application in the terminal with this command: python app.py
 
 Launch the application in the terminal with this command: python app.py
 
+
+
+Dis-moi quelle fonction créer dans def close_tournament(self): pour que la variable TOURNOIS_LIST du fichier 1 soit réinitialisée en liste vide ?
+
+J'ai 2 fichiers de codes qui communiquent :
