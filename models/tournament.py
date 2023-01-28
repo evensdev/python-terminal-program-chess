@@ -1,4 +1,5 @@
 from tinydb import TinyDB, Query, where
+from views.display import Display
 from models.players import PLAYER_SUBSCRIBED
 import datetime
 import ast
@@ -55,7 +56,7 @@ class Rounds:
             second_list = list_player[half:]
 
             zip(first_list, second_list)
-            print(zip(first_list, second_list))
+            #print(zip(first_list, second_list))
 
             # créer des paires de match avec la fonction zip
             return list(zip(first_list, second_list))
@@ -120,7 +121,7 @@ class Rounds:
 
                 if len(LIST_ROUNDS) < 2:
 
-                    print("OPTION 1")
+                    #print("OPTION 1")
                     ranking_round = []
 
                     for item in LIST_ROUNDS[-1][3]:
@@ -169,7 +170,7 @@ class Rounds:
                     print(LIST_ROUNDS)
 
                 else :
-                    print("OPTION 2")
+                    #print("OPTION 2")
                     ranking_round = []
 
                     for item in LIST_ROUNDS[1][3]:
@@ -209,6 +210,8 @@ class Rounds:
 
     def end_round(self):
         LIST_ROUNDS[-1][2] = datetime.datetime.now()
+        print("INFO : L'horaire de la fin de Round est enregistré maintenant")
+        print("")
  
 class Tournois():
 
@@ -248,31 +251,37 @@ class Tournois():
             joueurs_preselect = []
             nb_players = 8
 
-            while nb_players > 0:
-                player_subscribe = input('Inscrivez un joueur en renseignant son numéro parmi la liste : ')
 
-                if int(player_subscribe) <= len(PLAYER_SUBSCRIBED) + 1 and int(player_subscribe) > 0:
+            while nb_players > 0:
+                player_subscribe = None
+                player_subscribe = Display().get_input('Inscrivez un joueur en renseignant son numéro parmi la liste : ', 'number')
+                player_subscribe = int(player_subscribe)
+                print(type(player_subscribe))
+
+                if player_subscribe < len(PLAYER_SUBSCRIBED):
                     self.joueurs.append(PLAYER_SUBSCRIBED[int(player_subscribe) - 1])
                     nb_players -= 1
                     print("-------------------------------------------------- ")
                     print(PLAYER_SUBSCRIBED[int(player_subscribe) - 1][0], "est inscrit !")
-                    print(nb_players)
+                    print("Il vous reste **",nb_players,"joueurs ** à inscrire")
+                    print("")
 
                 else:
                     print("-------------------------------------------------- ")
-                    response = self.display.get_input('Votre choix est incorrect, réessayez')
+                    print("Votre choix est incorrect")
+                    print("")
             else:
                 print("Tous les joueurs sont inscrits pour ce tournoi")
                 print('')
                 self.save()
-            print('Le Tournoi  a bien a bien été créé')
+            print('Le Tournoi **', TOURNOIS_LIST[-1][0], '** a bien a bien été créé')
             print('')
             print('Voici la liste des matchs du Round n°1')
             print('')
 
 
 
-        print("ÉTAPE 1/5 - NOM DU TOURNOIS")
+        print("ÉTAPE 1/5 - NOM DU TOURNOI")
         self.nom = input('Renseignez le Nom du Tournoi : ')
         print("ÉTAPE 2/5 - LIEU")
         self.lieu = input('Renseignez le Lieu du Tournoi : ')
@@ -296,7 +305,7 @@ class Tournois():
 
         TOURNOIS_LIST.append(item_tournois)
 
-        return item_tournois
+        #return item_tournois
 
 
     def update_nombre_tours(self):
@@ -321,9 +330,9 @@ class Tournois():
             print("")
 
             # Element ci-dessous à effacer après avoir vérifié tournois_list
-            print("RECAPITULATIF DE LA TABLE TOURNOIS_LIST")
-            print(TOURNOIS_LIST)
-            LIST_ROUNDS = []
+            #print("RECAPITULATIF DE LA TABLE TOURNOIS_LIST")
+            #print(TOURNOIS_LIST)
+            #LIST_ROUNDS = []
 
 
     def export_data(self):
@@ -389,19 +398,19 @@ class Tournois():
 
         # Test importation
 
-        print(tournament_imported)
+        #print(tournament_imported)
 
-        print(type(tournament_imported))
+        #print(type(tournament_imported))
 
         print("")
 
         # Test importation
-        print(rounds_imported)
+        #print(rounds_imported)
         print("")
 
         # Test importation
 
-        print(players_imported)
+        #print(players_imported)
         print("")
 
         ########################################################
@@ -416,7 +425,7 @@ class Tournois():
         # Convert Tournois de Dictionnaire JSON vers Liste
         tournois_dict_to_list = list(tournament_imported.values())
 
-        print(tournois_dict_to_list)
+        #print(tournois_dict_to_list)
 
         #######################################################
 
@@ -449,6 +458,6 @@ class Tournois():
         print("=================================================================")
         print("")
 
-        print(type(players_imported))
+        #print(type(players_imported))
         print("")
 
