@@ -314,8 +314,16 @@ class TournoisController:
 
     # Créer un match
     def create_round(self):
-        Rounds().new_round()
-        Tournois().update_nombre_tours()
+        if TOURNOIS_LIST == []:
+            print("")
+            print("----------------------------------------------------------")
+            print("IMPOSSIBLE DE CRÉER UN ROUND SANS AVOIR CRÉÉ UN TOURNOI...")
+            print("VEUILLEZ D'ABORD CRÉER UN TOURNOI")
+            print("----------------------------------------------------------")
+            print("")
+        else:
+            Rounds().new_round()
+            Tournois().update_nombre_tours()
 
 
     # Mise à jour des résultats
