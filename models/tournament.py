@@ -1,4 +1,5 @@
 from tinydb import TinyDB, Query, where
+from views.display import Display
 from models.players import PLAYER_SUBSCRIBED
 import datetime
 import ast
@@ -248,31 +249,37 @@ class Tournois():
             joueurs_preselect = []
             nb_players = 8
 
-            while nb_players > 0:
-                player_subscribe = input('Inscrivez un joueur en renseignant son numéro parmi la liste : ')
 
-                if int(player_subscribe) <= len(PLAYER_SUBSCRIBED) + 1 and int(player_subscribe) > 0:
+            while nb_players > 0:
+                player_subscribe = None
+                player_subscribe = Display().get_input('Inscrivez un joueur en renseignant son numéro parmi la liste : ', 'number')
+                player_subscribe = int(player_subscribe)
+                print(type(player_subscribe))
+
+                if player_subscribe < len(PLAYER_SUBSCRIBED):
                     self.joueurs.append(PLAYER_SUBSCRIBED[int(player_subscribe) - 1])
                     nb_players -= 1
                     print("-------------------------------------------------- ")
                     print(PLAYER_SUBSCRIBED[int(player_subscribe) - 1][0], "est inscrit !")
-                    print(nb_players)
+                    print("Il vous reste **",nb_players,"joueurs ** à inscrire")
+                    print("")
 
                 else:
                     print("-------------------------------------------------- ")
-                    response = self.display.get_input('Votre choix est incorrect, réessayez')
+                    print("Votre choix est incorrect")
+                    print("")
             else:
                 print("Tous les joueurs sont inscrits pour ce tournoi")
                 print('')
                 self.save()
-            print('Le Tournoi  a bien a bien été créé')
+            print('Le Tournoi **',TOURNOIS_LIST[-1][0], '** a bien a bien été créé')
             print('')
             print('Voici la liste des matchs du Round n°1')
             print('')
 
 
 
-        print("ÉTAPE 1/5 - NOM DU TOURNOIS")
+        print("ÉTAPE 1/5 - NOM DU TOURNOI")
         self.nom = input('Renseignez le Nom du Tournoi : ')
         print("ÉTAPE 2/5 - LIEU")
         self.lieu = input('Renseignez le Lieu du Tournoi : ')
