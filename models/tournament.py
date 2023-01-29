@@ -1,10 +1,7 @@
-from tinydb import TinyDB, Query, where
-
-import models.tournament
+from tinydb import TinyDB
 from views.display import Display
 from models.players import PLAYER_SUBSCRIBED
 import datetime
-import ast
 
 # Base de données
 db = TinyDB('db.json')
@@ -21,9 +18,9 @@ def clear_rounds():
 
 class Rounds:
     def __init__(self,
-                 start = datetime.datetime.now(),
-                 end = str(),
-                 matches = []):
+                 start=datetime.datetime.now(),
+                 end=str(),
+                 matches=[]):
 
         self.start = str(datetime.datetime.now())
         self.end = str(datetime.datetime.now())
@@ -32,10 +29,6 @@ class Rounds:
     # initialiser le 1er round quand le tournoi est créé
     def initialize_round(self):
 
-
-        #######    Ajout d'informations sur le round
-
-
         launch_round = []
         launch_round.append("Round n°" + str(len(LIST_ROUNDS) + 1))
         launch_round.append(str(self.start))
@@ -43,19 +36,9 @@ class Rounds:
         launch_round.append(self.matches)
         LIST_ROUNDS.append(launch_round)
 
-
-
-
-        #######   add player subscribed in list
-
-
         list_player = []
         for item in TOURNOIS_LIST[-1][2]:
             list_player.append(item)
-
-
-        #######   function to divide list of players subscribed in 2 lists
-
 
         def split_list(list_player):
             half = len(list_player) // 2
@@ -64,17 +47,14 @@ class Rounds:
             second_list = list_player[half:]
 
             zip(first_list, second_list)
-            #print(zip(first_list, second_list))
+            # print(zip(first_list, second_list))
 
             # créer des paires de match avec la fonction zip
             return list(zip(first_list, second_list))
 
         list_of_match = split_list(list_player)
 
-
-
-        #######  définir les matchs pour le round à partir de la liste
-
+        # définir les matchs pour le round à partir de la liste
 
         def match_for_round():
 
@@ -97,29 +77,32 @@ class Rounds:
 
                 self.matches.append(duel)
 
-                print(f'Paire n°: {numero_paire}', ".", match[0][0], " VS ", match[1][0])
+                print(f'Paire n°: {numero_paire}',
+                      ".",
+                      match[0][0],
+                      " VS ", match[1][0])
 
         match_for_round()
 
-
-        ######    Display information about round
+        # Display information about round
 
         print("")
         print("")
-        #print(LIST_ROUNDS[-1][3])
+        # print(LIST_ROUNDS[-1][3])
         print("")
 
-
-    ######  Créer un nouveau round
+    # Créer un nouveau round
 
     def new_round(self):
-        if len(LIST_ROUNDS) < 4 :
+        if len(LIST_ROUNDS) < 4:
 
-            if LIST_ROUNDS[-1][2] == None:
+            if LIST_ROUNDS[-1][2] is None:
                 print("")
                 print("")
-                print("Vous n'avez pas mis à jour les résultats du précédent round")
-                print("Veuillez mettre à jour les scores en tapant sur la touche n°3")
+                print("Vous n'avez pas mis à jour "
+                      "les résultats du précédent round")
+                print("Veuillez mettre à jour "
+                      "les scores en tapant sur la touche n°3")
                 print("")
                 print("")
 
@@ -129,7 +112,7 @@ class Rounds:
 
                 if len(LIST_ROUNDS) < 2:
 
-                    #print("OPTION 1")
+                    # print("OPTION 1")
                     ranking_round = []
 
                     for item in LIST_ROUNDS[-1][3]:
@@ -137,8 +120,10 @@ class Rounds:
                         for player in item:
                             ranking_round.append(player)
 
-                    ranking_round = sorted(ranking_round, key=lambda ranking: ranking[-1], reverse=True)
-
+                    ranking_round = sorted(
+                        ranking_round,
+                        key=lambda ranking: ranking[-1],
+                        reverse=True)
 
                     def split_list(list_player):
                         half = len(list_player) // 2
@@ -154,31 +139,32 @@ class Rounds:
                         # créer des paires de match avec la fonction zip
                         return list(zip(first_list, second_list))
 
-
-
                     second_round = split_list(ranking_round)
 
                     print(second_round)
 
                     # Enregistrer le round dans la liste
-
-
                     launch_round = []
-                    launch_round.append("Round numero " + str(len(LIST_ROUNDS) + 1))
+                    launch_round.append(
+                        "Round numero " + str(len(LIST_ROUNDS) + 1))
                     launch_round.append(str(self.start))
                     launch_round.append(None)
                     launch_round.append(second_round)
                     LIST_ROUNDS.append(launch_round)
 
                     print("")
-                    print("Le round numero ",len(LIST_ROUNDS), " est prêt")
-                    print("Vous pouvez entrer les résultats des nouveaux matchs en sélectionnant la touche 3' ")
+                    print("Le round numero ",
+                          len(LIST_ROUNDS),
+                          " est prêt")
+                    print("Vous pouvez entrer les résultats"
+                          " des nouveaux matchs "
+                          "en sélectionnant la touche 3' ")
                     print("")
 
                     print(LIST_ROUNDS)
 
-                else :
-                    #print("OPTION 2")
+                else:
+                    # print("OPTION 2")
                     ranking_round = []
 
                     for item in LIST_ROUNDS[1][3]:
@@ -186,41 +172,52 @@ class Rounds:
                         for player in item:
                             ranking_round.append(player)
 
-                        ranking_round = sorted(ranking_round, key=lambda ranking: ranking[-1], reverse=True)
-
+                        ranking_round = sorted(
+                            ranking_round,
+                            key=lambda ranking: ranking[-1],
+                            reverse=True)
 
                     duel_ready_to_control = []
-                    duel_ready_to_control.append([ranking_round[0], ranking_round[1]])
-                    duel_ready_to_control.append([ranking_round[2], ranking_round[3]])
-                    duel_ready_to_control.append([ranking_round[4], ranking_round[5]])
-                    duel_ready_to_control.append([ranking_round[6], ranking_round[7]])
+                    duel_ready_to_control.append(
+                        [ranking_round[0], ranking_round[1]])
+                    duel_ready_to_control.append(
+                        [ranking_round[2], ranking_round[3]])
+                    duel_ready_to_control.append(
+                        [ranking_round[4], ranking_round[5]])
+                    duel_ready_to_control.append(
+                        [ranking_round[6], ranking_round[7]])
 
                     launch_round = []
-                    launch_round.append("Round numero " + str(len(LIST_ROUNDS) + 1))
+                    launch_round.append(
+                        "Round numero " + str(len(LIST_ROUNDS) + 1))
                     launch_round.append(None)
                     launch_round.append(None)
                     launch_round.append(duel_ready_to_control)
                     LIST_ROUNDS.append(launch_round)
 
                     print("")
-                    print("Le round n°",len(LIST_ROUNDS), " est prêt")
-                    print("Vous pouvez entrer les résultats des nouveaux matchs en sélectionnant la touche 3' ")
+                    print("Le round n°", len(LIST_ROUNDS), " est prêt")
+                    print("Vous pouvez entrer les résultats"
+                          " des nouveaux matchs "
+                          "en sélectionnant la touche 3' ")
                     print("")
 
-                    #return print(LIST_ROUNDS)
+                    # return print(LIST_ROUNDS)
         else:
             print("")
-            print("Vous avez déjà atteint les 4 rounds et entré les résultats.")
-            print("Tapez sur la touche 6 pour clôturer le tournoi ou si c'est déjà fait, vous pouvez créer un nouveau tournoi ! ")
+            print("Vous avez déjà atteint les 4 rounds"
+                  " et entré les résultats.")
+            print("Tapez sur la touche 6 "
+                  "pour clôturer le tournoi ou si c'est déjà fait, "
+                  "vous pouvez créer un nouveau tournoi ! ")
             print("")
-
-
 
     def end_round(self):
         LIST_ROUNDS[-1][2] = datetime.datetime.now()
-        print("INFO : L'horaire de la fin de Round est enregistré maintenant")
+        print("L'horaire de la fin du Round est enregistré maintenant")
         print("")
- 
+
+
 class Tournois():
 
     def __init__(self, nom=None,
@@ -243,11 +240,11 @@ class Tournois():
     def make_tournament(self):
 
         def add_player_tournament():
-            print("                                       ")
-            print("-------------------------------------------------- ")
+            print("     ")
+            print("-------------------------- ")
             print("Ajouter des joueurs")
-            print("-------------------------------------------------- ")
-            print("                                       ")
+            print("-------------------------- ")
+            print("    ")
 
             quantite = 0
             for item in PLAYER_SUBSCRIBED:
@@ -255,48 +252,56 @@ class Tournois():
                 print(quantite, ".", item[0], item[1])
 
             print("")
-
-            joueurs_preselect = []
             nb_players = 8
-
 
             while nb_players > 0:
                 player_subscribe = None
-                player_subscribe = Display().get_input('Inscrivez un joueur en renseignant son numéro parmi la liste : ', 'number')
+                player_subscribe = Display().get_input(
+                    'Inscrivez un joueur en renseignant '
+                    'son numéro parmi la liste : ',
+                    'number')
                 player_subscribe = int(player_subscribe)
                 print(type(player_subscribe))
 
                 if player_subscribe < len(PLAYER_SUBSCRIBED):
-                    self.joueurs.append(PLAYER_SUBSCRIBED[int(player_subscribe) - 1])
+                    self.joueurs.append(
+                        PLAYER_SUBSCRIBED[int(player_subscribe) - 1])
                     nb_players -= 1
-                    print("-------------------------------------------------- ")
-                    print(PLAYER_SUBSCRIBED[int(player_subscribe) - 1][0], "est inscrit !")
-                    print("Il vous reste **",nb_players,"joueurs ** à inscrire")
+                    print("-------------------------------- ")
+                    print(PLAYER_SUBSCRIBED[int(player_subscribe) - 1][0],
+                          "est inscrit !")
+                    print("Il vous reste **",
+                          nb_players,
+                          "joueurs ** à inscrire")
                     print("")
 
                 else:
-                    print("-------------------------------------------------- ")
+                    print("--------------------------------- ")
                     print("Votre choix est incorrect")
                     print("")
             else:
                 print("Tous les joueurs sont inscrits pour ce tournoi")
                 print('')
                 self.save()
-            print('Le Tournoi **', TOURNOIS_LIST[-1][0], '** a bien a bien été créé')
+            print('Le Tournoi **',
+                  TOURNOIS_LIST[-1][0],
+                  '** a bien a bien été créé')
             print('')
             print('Voici la liste des matchs du Round n°1')
             print('')
-
-
 
         print("ÉTAPE 1/5 - NOM DU TOURNOI")
         self.nom = input('Renseignez le Nom du Tournoi : ')
         print("ÉTAPE 2/5 - LIEU")
         self.lieu = input('Renseignez le Lieu du Tournoi : ')
         print("ÉTAPE 3/5 - TYPE DE COUP")
-        self.temps = input('Chosissez votre coup | "un bullet", "un blitz" ou un "coup rapide" : ')
+        self.temps = input('Chosissez votre coup | '
+                           '"un bullet", '
+                           '"un blitz" '
+                           'ou un "coup rapide" : ')
         print("ÉTAPE 4/5 - DESCRIPTION")
-        self.description = input('Renseignez les Remarques sur le Tournoi : ')
+        self.description = input(
+            'Renseignez les Remarques sur le Tournoi : ')
         print("ÉTAPE 5/5 - AJOUT DE JOUEURS")
         self.joueurs = add_player_tournament()
 
@@ -313,8 +318,7 @@ class Tournois():
 
         TOURNOIS_LIST.append(item_tournois)
 
-        #return item_tournois
-
+        # return item_tournois
 
     def update_nombre_tours(self):
         self.nombre_tours += 1
@@ -324,10 +328,7 @@ class Tournois():
         LIST_ROUNDS = []
         return print(LIST_ROUNDS)
 
-
-
     def export_data(self):
-
 
         # Convert tournois de Liste vers Dictionnaire
 
@@ -345,7 +346,6 @@ class Tournois():
             }
             tournois_dict_list.append(tournoi)
 
-        ##############################################################
         # Convert Rounds  Liste vers Dictionnaire
         def list_to_dict(lst):
             my_dict = {}
@@ -355,33 +355,26 @@ class Tournois():
 
         list_to_dict(LIST_ROUNDS)
 
-        ##############################################################
         # Convert Player  Liste vers Dictionnaire
-        player_subscribed_dict = {i: player for i, player in enumerate(PLAYER_SUBSCRIBED)}
+        player_subscribed_dict = {
+            i: player for i, player in enumerate(PLAYER_SUBSCRIBED)}
 
         tournament_converted = tournois_dict_list[0]
         rounds_converted = list_to_dict(LIST_ROUNDS)
-        players_converted = player_subscribed_dict = {i: player for i, player in enumerate(PLAYER_SUBSCRIBED)}
-
+        players_converted = player_subscribed_dict
         chess.insert(tournament_converted)
         chess.insert(rounds_converted)
         chess.insert(players_converted)
-
-        ################################################
-
-
-        print("")
-        print("=================================================================")
-        print("Votre configuration a bien été sauvegardée en base de données !")
-        print("Vous pouvez à tout moment recharger votre dernière sauvegarde")
-        print("=================================================================")
-        print("")
+        print("====================================================")
+        print("Votre configuration a bien été sauvegardée "
+              "en base de données !")
+        print("Vous pouvez à tout moment recharger "
+              "votre dernière sauvegarde")
+        print("====================================================")
 
     def import_data(self):
 
-
-
-        # Importation des listes
+        # Importation des lists
 
         tournament_imported = chess.get(doc_id=1)
         rounds_imported = chess.get(doc_id=2)
@@ -389,40 +382,32 @@ class Tournois():
 
         # Test importation
 
-        #print(tournament_imported)
+        # print(tournament_imported)
 
-        #print(type(tournament_imported))
+        # print(type(tournament_imported))
 
         print("")
 
         # Test importation
-        #print(rounds_imported)
+        # print(rounds_imported)
         print("")
 
         # Test importation
 
-        #print(players_imported)
+        # print(players_imported)
         print("")
 
-        ########################################################
-        #
         # Convert Round  Dictionnaire vers Liste
         def dict_to_list(d):
-            return list(d.values())
 
+            return list(d.values())
         # Convert Player  Dictionnaire  vers Liste
         player_dict_to_list = list(players_imported.values())
-
         # Convert Tournois de Dictionnaire JSON vers Liste
         tournois_dict_to_list = list(tournament_imported.values())
-
-        #print(tournois_dict_to_list)
-
-        #######################################################
-
+        # print(tournois_dict_to_list)
         for item in player_dict_to_list:
             PLAYER_SUBSCRIBED.append(item)
-
         tournois_cache = []
         for item in tournois_dict_to_list:
             tournois_cache.append(item)
@@ -431,24 +416,15 @@ class Tournois():
         for item in dict_to_list(rounds_imported):
             LIST_ROUNDS.append(item)
 
-
-
-        ####################
-
-        print("")
         print(PLAYER_SUBSCRIBED)
-        print("")
         print(TOURNOIS_LIST)
-        print("")
         print(LIST_ROUNDS)
-
-        print("")
-        print("=================================================================")
+        print(" ")
+        print("===================================================")
         print("Votre Sauvegarde a bien été Chargé sur ce jeu !")
-        print("Vous pouvez retrouver tous les éléments sauvegardés de votre ancienne partie")
-        print("=================================================================")
+        print("Vous pouvez retrouver tous les éléments sauvegardés"
+              " de votre ancienne partie")
+        print("===================================================")
+        print(" ")
+        # print(type(players_imported))
         print("")
-
-        #print(type(players_imported))
-        print("")
-

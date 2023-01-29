@@ -1,14 +1,8 @@
-from datetime import datetime
-import re
-from tinydb import TinyDB, Query, where
+from tinydb import TinyDB
+from controllers.main import MainController as Mc
 
 db = TinyDB('db.json')
 
-
-"""---------------------------------------------------CONTROLLERS--------------------------------------------------------"""
-from controllers.main import MainController as MC
-
-
 if __name__ == "__main__":
-    controller = MC()
+    controller = Mc()
     controller.main()

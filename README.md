@@ -13,6 +13,8 @@ Activez l'environnement avec cette commande : source env/bin/activate
 
 Installez les packages nécessaires avec cette commmande : pip install -r requirements.txt
 
+Pour exporter un rapport flak8 html sur le code, faites la commande suivante : flake8 --exclude=env --format=html --htmldir=flake-report
+
 Lancez l'application dans le terminal avec cette commande : python app.py
 
 
@@ -38,10 +40,7 @@ Install the necessary packages with this command: pip install -r requirements.tx
 
 Launch the application in the terminal with this command: python app.py
 
+To export a flake8 html report on the code, do the following command: flake8 --exclude=env --format=html --htmldir=flake-report
+
 Launch the application in the terminal with this command: python app.py
 
-
-
-Dis-moi quelle fonction créer dans def close_tournament(self): pour que la variable TOURNOIS_LIST du fichier 1 soit réinitialisée en liste vide ?
-
-J'ai 2 fichiers de codes qui communiquent :
