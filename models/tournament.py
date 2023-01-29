@@ -213,7 +213,7 @@ class Rounds:
             print("")
 
     def end_round(self):
-        LIST_ROUNDS[-1][2] = datetime.datetime.now()
+        LIST_ROUNDS[-1][2] = str(datetime.datetime.now())
         print("L'horaire de la fin du Round est enregistré maintenant")
         print("")
 
